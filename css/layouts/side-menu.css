@@ -40,15 +40,7 @@ input#userName {
     text-transform: uppercase;
 }
 
-input#userDataSubmit.newbutton {
-    margin: 10% 0% 10% 0%;
-    float: middle;
-}
 
-input#userDataReset.newbutton {
-    margin: 0% 0% 0% 0%;
-    float: middle;
-}
 
 button.pure-button {
     margin-top: 
@@ -83,9 +75,6 @@ fieldset {
     text-align: center;
 }
 
-.content {
-    margin-left: 50px;
-}
 
 input {
     display: inline-block;
@@ -105,7 +94,7 @@ Add transition to containers so they can push in and out.
 #menu,
 .menu-link {
     -webkit-transition: all 0.2s ease-out;
-    -moz-transition: all 0.2s ease-out;@
+    -moz-transition: all 0.2s ease-out;
     -ms-transition: all 0.2s ease-out;
     -o-transition: all 0.2s ease-out;
     transition: all 0.2s ease-out;
@@ -135,7 +124,8 @@ The content `<div>` is where all your content goes.
 */
 .content {
     margin: 0 auto;
-    padding: 0 25%;
+padding-left: 1em;
+padding-right: 1em;
     max-width: 800px;
     margin-bottom: 50px;
     line-height: 1.6em;
@@ -316,8 +306,6 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     #menu {
         left: 150px;
     }
-
-    
 
     .menu-link {
         position: fixed;

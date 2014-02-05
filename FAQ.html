@@ -16,21 +16,20 @@
 
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
 
-<head>
-    <link href="/Users/benhare/Desktop/pure-layout-side-menu/csss/hover-min.css" rel="stylesheet">
-</head>
 
-   <!--[if lte IE 8]>
+
+
+
+  
+    <!--[if lte IE 8]>
         <link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="css/layouts/side-menu.css">
     <!--<![endif]-->
-   
 
 </head>
 <body>
-
 
 <div id="layout">
     <!-- Menu toggle -->
@@ -41,16 +40,16 @@
 
     <div id="menu">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="#"><img src="logo.svg" width="50"></a>
+            <a class="pure-menu-heading" href="#">Weekends</a>
 
             <ul>
                 <li><a href="signin.html">Sign-up</a></li>
 
-                <li class="menu-item-divided pure-menu-selected">
-                    <a href="index.html">Tracker</a>
+                <li>
+                    <a href="index.html">Alcohol Tracker</a>
                 </li>
 
-                <li><a href="FAQ.html">FAQ</a></li>
+                <li class="menu-item-divided pure-menu-selected"><a href="FAQ.html">FAQ</a></li>
 
                 <li><a href="Team.html">Team</a></li>
             </ul>
@@ -59,24 +58,35 @@
 
     <div id="main">
             <div class="header">
-                <img src="logo.svg" width="150">
+                <img src="logo.svg">
             </div>
 
-            <div class="content">
-                <div></div>
+            <div class="content" id="signin">
+                    <form class="pure-form">
+        <fieldset>
+        
+
+            <input type="email" placeholder="Email">
+            <input type="password" placeholder="Password">
+
+            <label for="remember">
+                <input id="remember" type="checkbox"> Remember me
+            </label>
+
+            <button type="submit" class="pure-button">Sign in</button>
+        </fieldset>
+    </form>
             </div>
-            
-            <div class="footer">tt
-            </div>
+
+
+
     </div>
-
-   
 
     <!--<div class="footer">
         View the source of this layout to learn more. Made with love by the YUI Team.
     </div>-->
 
-</div>kk
+</div>
 
 
 <script src="js/ui.js"></script>

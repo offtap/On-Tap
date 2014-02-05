@@ -17,10 +17,57 @@ body {
     height: auto;
 }
 
+/* input form buttons */
+input[type=radio] {
+    display: inline-block;
+    float: right;
+}
 
+input#userWeight2 {
+    float: right;
+}
+
+input#userName {
+    margin-top:  20%;
+    text-transform: uppercase;
+}
+
+input#userDataSubmit.newbutton {
+    margin: 10% 0% 10% 0%;
+    float: middle;
+}
+
+input#userDataReset.newbutton {
+    margin: 0% 0% 0% 0%;
+    float: middle;
+}
+
+button.pure-button {
+    margin-top: 
+}
+
+.newbutton {
+text-transform: uppercase;
+font-size: 12px;
+background-color: #fafafa;
+letter-spacing: 2px;
+-webkit-transition: all .3s;
+-moz-transition: all .3s;
+-o-transition: all .3s;
+transition: all .3s;
+border: 1px solid #888;
+color: #555;
+padding: 10px 20px;
+
+}
+
+fieldset {
+    text-align: left;
+}
 #signin{
     margin-top: 30%;
 }
+/* end of input form buttons */
 }
 
 .content {

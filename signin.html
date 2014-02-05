@@ -51,21 +51,24 @@
 
             <div class="content">
                     <form class="pure-form" id="userDataForm" onSubmit="return false;">
-        <fieldset>
+            <fieldset>
            <input type="text" id="userName" required="true" placeholder="Name"> <br>
-            <p class="inputLabel">Male</p> <input type="radio" id="maleGender" name="gender" value="male" required="true">
-            <p class="inputLabel">Female</p> <input type="radio" id="femaleGender" name="gender" value="female"required="true"><br>
+            <p class="inputLabel">Male<input type="radio" id="maleGender" name="gender" value="male" required="true"></p> 
+            <p class="inputLabel">Female<input type="radio" id="femaleGender" name="gender" value="female"required="true"></p> 
             <!--Weight:<input type="number" value="60" min="40" max="150" id="userWeight">kgs--> <!--look at making this a slider? easier input?-->
-            <br>
-            <p class="inputLabel">Weight</p> (40)<input type="number" value="60" min="40" max="120" id="userWeight2" >(120)<p class="inputLabel">kgs</p>
-            <br>   
-            <input type="submit" id="userDataSubmit" class="pure-button" onClick="getUserInput()"> 
-            <input type="reset" id="userDataReset" class="pure-button">
+            
+            <p class="inputLabel">Weight (kgs)<input type="number" value="60" min="40" max="120" id="userWeight2" ><p class="inputLabel"></p>
+
+             <!--<p class="inputLabel">Weight (kgs)</p>(40)<input type="number" value="60" min="40" max="120" id="userWeight2" >(120)<p class="inputLabel"></p>-->
+              
+            <input type="submit" id="userDataSubmit" class="newbutton" onClick="getUserInput()"> 
+            <input type="reset" id="userDataReset" class="newbutton">
         </fieldset>
-                    </form>
+            </form>
+
             <p id="greeting" class="inputLabel"></p>
             <p id="dataCheck" class="inputLabel"></p>
-            <button name='confirmInput' class="pure-button" onClick="calcBAC()">BAC PLZ</button>
+            <button name='confirmInput' class="newbutton" onClick="calcBAC()">BAC PLZ</button>
             <p id="yourBAC" class="inputLabel"></p>
             </div>
 

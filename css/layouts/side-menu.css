@@ -18,11 +18,9 @@ body {
 }
 
 
-#signin {
+#signin{
     margin-top: 30%;
 }
-a.pure-button {
-    margin-top: 0.5em;
 }
 
 .content {
@@ -31,6 +29,10 @@ a.pure-button {
 
 input {
     display: inline-block;
+}
+
+.inputLabel{
+    color: #999;
 }
 
 #menuLink {

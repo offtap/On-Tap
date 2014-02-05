@@ -7,19 +7,7 @@
 
     <title>Side Menu &ndash; Layout Examples &ndash; Pure</title>
 
-    
-
-
-
-
-
-
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
-
-
-
-
-
   
     <!--[if lte IE 8]>
         <link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
@@ -61,24 +49,25 @@
                 <img src="images/logo3.svg" width="150">
             </div>
 
-            <div class="content" id="signin">
-                    <form class="pure-form">
+            <div class="content">
+                    <form class="pure-form" id="userDataForm" onSubmit="return false;">
         <fieldset>
-        
-
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-
-            <label for="remember">
-                <input id="remember" type="checkbox"> Remember me
-            </label>
-
-            <button type="submit" class="pure-button">Sign in</button>
+           <input type="text" id="userName" required="true" placeholder="Name"> <br>
+            <p class="inputLabel">Male</p> <input type="radio" id="maleGender" name="gender" value="male" required="true">
+            <p class="inputLabel">Female</p> <input type="radio" id="femaleGender" name="gender" value="female"required="true"><br>
+            <!--Weight:<input type="number" value="60" min="40" max="150" id="userWeight">kgs--> <!--look at making this a slider? easier input?-->
+            <br>
+            <p class="inputLabel">Weight</p> (40)<input type="number" value="60" min="40" max="120" id="userWeight2" >(120)<p class="inputLabel">kgs</p>
+            <br>   
+            <input type="submit" id="userDataSubmit" class="pure-button" onClick="getUserInput()"> 
+            <input type="reset" id="userDataReset" class="pure-button">
         </fieldset>
-    </form>
+                    </form>
+            <p id="greeting" class="inputLabel"></p>
+            <p id="dataCheck" class="inputLabel"></p>
+            <button name='confirmInput' class="pure-button" onClick="calcBAC()">BAC PLZ</button>
+            <p id="yourBAC" class="inputLabel"></p>
             </div>
-
-
 
     </div>
 
@@ -88,7 +77,7 @@
 
 </div>
 
-
+<script src="js/algorithmTest1.js"></script>
 <script src="js/ui.js"></script>
 
 

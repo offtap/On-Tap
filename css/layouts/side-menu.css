@@ -28,7 +28,6 @@ h2 {
 /* input form buttons */
 input[type=radio] {
     display: inline-block;
-    float: right;
 }
 
 input#userWeight2 {
@@ -75,6 +74,9 @@ fieldset {
     text-align: center;
 }
 
+.content {
+    margin-left: 50px;
+}
 
 input {
     display: inline-block;

@@ -63,7 +63,7 @@
                         </div>
                         <!--Weight:<input type="number" value="60" min="40" max="150" id="userWeight">kgs--> <!--look at making this a slider? easier input?-->
                         <div class="pure-control-group">
-                            <p class="inputLabel">Weight (kgs)<br><input type="number" value="60" min="40" max="120" id="userWeight2" ><p class="inputLabel"></p>
+                            <p class="inputLabel">Weight (kgs)<br><input type="range" value="60" min="40" max="120" id="userWeight2" ><p class="inputLabel"></p>
                         </div>
                          <!--<p class="inputLabel">Weight (kgs)</p>(40)<input type="number" value="60" min="40" max="120" id="userWeight2" >(120)<p class="inputLabel"></p>-->
                           
@@ -75,8 +75,11 @@
                 
                 <p id="greeting" class="inputLabel"></p>
                 <p id="dataCheck" class="inputLabel"></p>
+
                 <button name='confirmInput' class="newbutton" onClick="calcBAC()">BAC PLZ</button>
+                
                 <p id="yourBAC" class="inputLabel"></p>
+                <p id="SoberIn" class="inputLabel"></p>
             </div>
 
     </div>

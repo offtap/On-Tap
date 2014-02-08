@@ -7,11 +7,6 @@
 
     <title>On Tap.</title>
 
-    
-
-
-
-
 
 <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-min.css">
 
@@ -59,16 +54,39 @@
             <div class="header">
                 <img src="images/logo3.svg" width="150">
             </div>
-
+            
             <div class="content">
-                <div></div>
+                
+                <button name='confirmInput' class="newbutton" onClick="calcBAC()">BAC PLZ</button>
+
+                <div id="BACDisplay">
+                    <p class="inputLabel">Your BAC is</p><br>
+                    <p id="BACCounter" class="inputLabel"></p><br><br>
+                    <p class="inputLabel">You will be alcohol-free in</p><br>
+                    <p id="SoberInCounter" class="inputLabel"></p><br><br>
+                </div>
+
+                <form class="pure-form pure-form-aligned" id="drinkInputTest" onSubmit="return false;">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1" required="true"></p> 
+                        </div>
+                        <div class="pure-control-group">
+                            <p class="inputLabel">Wine<input type="radio" id="drinkType:Wine" name="drinkType" value="2"required="true"></p> 
+                        </div>
+                        <div class="pure-control-group">
+                            <p class="inputLabel">Spirit<input type="radio" id="drinkType:Spirit" name="drinkType" value="3"required="true"></p> 
+                        </div>
+                          
+                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="addNewDrink()">
+                        <input type="reset" id="userDataReset" class="newbutton">
+                    </fieldset>
+                </form>
             </div>
             
             <div class="footer">
             </div>
     </div>
-
-   
 
     <!--<div class="footer">
         View the source of this layout to learn more. Made with love by the YUI Team.
@@ -76,9 +94,8 @@
 
 </div>kk
 
-
+<script src="js/algorithmTest1.js"></script>
 <script src="js/ui.js"></script>
-
 
 </body>
 </html>

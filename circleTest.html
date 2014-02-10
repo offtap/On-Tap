@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -49,35 +49,9 @@
             </div>
 
             <div class="content">
-                <form class="pure-form pure-form-aligned" id="userDataForm" onSubmit="return false;">
-                    <fieldset>
-                        <div class="pure-control-group">
-                            <input type="text" id="userName" required="true" placeholder="Name" autofocus>
-                            <p class="inputLabel">Male  <input type="radio" id="maleGender" name="gender" value="male" required="true"></p> 
-                        </div>
-                        <div class="pure-control-group">
-                            <p class="inputLabel">Female  <input type="radio" id="femaleGender" name="gender" value="female"required="true"></p> 
-                        </div>
-
-                        <div class="pure-control-group">
-                            <p class="inputLabel">Weight (kgs)<br><input type="range" value="60" min="40" max="120" id="userWeight" ><p class="inputLabel"></p>
-                        </div>
-
-                        <p class="inputLabel">Choose a profile picture:</p> <input type="file" accept="image/*" class="newbutton" id="capture" capture="camera"> 
-                          
-                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="getUserInput()"> 
-                        <input type="reset" id="userDataReset" class="newbutton">
-                    </fieldset>
-                </form>
-
                 
-                <p id="greeting" class="inputLabel"></p>
-                <p id="dataCheck" class="inputLabel"></p>
-
-                <button name='confirmInput' class="newbutton" onClick="calcBAC()">BAC PLZ</button>
-                
-                <p id="yourBAC" class="inputLabel"></p>
-                <p id="SoberIn" class="inputLabel"></p>
+                <canvas id="myCanvas" style="margin:30% 7%;" width="250" height="250"></canvas>
+                <button class="newbutton" onClick="drawCircle();">DRAW</button>
             </div>
 
     </div>

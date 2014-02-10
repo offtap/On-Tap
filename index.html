@@ -56,14 +56,16 @@
             </div>
             
             <div class="content">
-                
-                <button name='confirmInput' class="newbutton" onClick="calcBAC()">BAC PLZ</button>
+
+                <!--<canvas id="myCanvas" height="250px" width="250px" style="border:1px solid #000000; position:relative; display:block; margin:10px auto;"></canvas>-->
+
+                <button name='confirmInput' class="newbutton" onClick="calcBAC()" style="margin:10px auto; position:relative; display:block;">BAC PLZ</button>
 
                 <div id="BACDisplay">
-                    <p class="inputLabel">Your BAC is</p><br>
-                    <p id="BACCounter" class="inputLabel"></p><br><br>
-                    <p class="inputLabel">You will be alcohol-free in</p><br>
-                    <p id="SoberInCounter" class="inputLabel"></p><br><br>
+                    <p class="inputLabel" style="margin: 5px auto;">Your BAC is</p><br>
+                    <p id="BACCounter" class="inputLabel" style="margin: 5px auto;"></p><br><br>
+                    <p class="inputLabel" style="margin: 5px auto;">You will be alcohol-free in</p><br>
+                    <p id="SoberInCounter" class="inputLabel" style="margin: 5px auto;"></p><br><br>
                 </div>
 
                 <form class="pure-form pure-form-aligned" id="drinkInputTest" onSubmit="return false;">
@@ -78,7 +80,8 @@
                             <p class="inputLabel">Spirit<input type="radio" id="drinkType:Spirit" name="drinkType" value="3"required="true"></p> 
                         </div>
                           
-                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="addNewDrink()">
+                        <!--<input type="submit" id="userDataSubmit" class="newbutton" onClick="addNewDrink()">-->
+                        <button name='addDrink' class="newbutton" onClick="addNewDrink()">Add Drink</button>
                         <input type="reset" id="userDataReset" class="newbutton">
                     </fieldset>
                 </form>

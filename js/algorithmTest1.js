@@ -1,22 +1,36 @@
 alert("JS loaded");
 
-//var c = document.getElementById("myCanvas");
-//var ctx = c.getContext("2d");
-                    
-var userName = "Your name here";
-var weight = 60;
-var gender = "unknown";
-var genderConstant = 6.8;
+//variables + canvas identifier for the animated blue circle
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+	var xPos = 125;			//c.width / 2;
+    var yPos = 125;			//c.height / 2;
+    var radius = 100; 
+    var startAngle = -0.5 * Math.PI;
+    var curVal = -0.5;
+    var endAngle = 0 * Math.PI;
+    var counterClockwise = false;
+    var animateTo = 0.00;
 
+//variables set by the signup form                    
+var userName = "Your name here";	//user defined name
+var weight = 60;					//user defined weight
+var gender = "unknown";				//user-defined gender
+var genderConstant = 6.8;			//gender constant depending on gender (default=male, 6.8)
+
+//BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
 
-var BAC = 0.05;			//Blood Alcohol Content
+//BAC variables
+var prevBAC = 0.00;			//BAC before new drink
+var newBAC = 0.00;			//new Blood Alcohol Content after new drink
 
-var SoberInTotal = 0.00;	//estimated total time till sober
+//Variables for calculating the time till sober
+var SoberInTotal = 0.00;	//float value for estimated total time till sober
 var SoberInDecimal = 0.00;		//multiple vars needed to calc hours + mins
-var SoberInHours = 0.00;
-var SoberInMins = 0.00;
+var SoberInHours = 0;		//integer value for hours
+var SoberInMins = 0.;		//integer value for mins
 
 var SoberTime = 0.00;		//estimated time when sober
 
@@ -55,7 +69,7 @@ function getUserInput(){
 function addNewDrink() {
 	hoursTotal = hoursTotal + 1;
 	if(document.getElementById("drinkType:Beer").checked) {
-		newDrinkSD = beerArray[0];
+		newDrinkSD = beerArray[2];
 	}
 	else if(document.getElementById("drinkType:Wine").checked) {
 		newDrinkSD = wineArray[1];
@@ -65,27 +79,38 @@ function addNewDrink() {
 	}
 	SDTotal = SDTotal + newDrinkSD;
 	calcBAC();
-	if(BAC<0.00){
-		BAC = 0.00;
+	if(newBAC<0.00){
+		newBAC = 0.00;
 	}
+	drawCircle();
 	calcSoberIn();
-	document.getElementById("BACCounter").innerHTML = BAC;
+	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
 	document.getElementById("drinkInputTest").reset();
 }
 
 function calcBAC(){
-	BAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
-	alert(BAC);
+	prevBAC = newBAC;
+	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
 	//drawCircle();
 }
 
 function drawCircle(){
-	ctx.beginPath();
-    ctx.arc(125,125,100,-0.5*Math.PI,0.5*(2*Math.PI));
-    ctx.lineWidth=25;
-    ctx.strokeStyle= '#3498db';
-    ctx.stroke();
+
+	//alert("drawCircle works");
+	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
+	animateTo = (((newBAC/0.1)*2)-0.5);
+	if(curVal < animateTo){
+      curVal+= 0.01;
+    }
+      endAngle = curVal * Math.PI;
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx.lineWidth = 30;
+      // line color
+      ctx.strokeStyle= '#3498db';
+      ctx.stroke();
+    setTimeout(drawCircle,25);
 }
 
 function calcSoberIn(){

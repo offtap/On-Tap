@@ -2,7 +2,28 @@ alert("JS loaded");
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-                    
+	var xPos = c.width / 2;
+    var yPos = c.height / 2;
+    var radius = 75; 
+    var startAngle = -0.5 * Math.PI;
+    var curVal = 0;
+    var endAngle = 0 * Math.PI;
+    var counterClockwise = false;
+
+/*function animate(){
+    if(curVal < 1.5){
+      curVal+= 0.01;
+    }
+      endAngle = curVal * Math.PI;
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx.lineWidth = 25;
+      // line color
+      ctx.strokeStyle= '#3498db';
+      ctx.stroke();
+    setTimeout(animate,1);
+}*/
+
 var userName = "Your name here";
 var weight = 60;
 var gender = "unknown";
@@ -11,7 +32,8 @@ var genderConstant = 6.8;
 var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
 
-var BAC = 0.05;			//Blood Alcohol Content
+var newBAC = 0.00;			//Blood Alcohol Content
+var prevBAC = 0.00;
 
 var SoberInTotal = 0.00;	//estimated total time till sober
 var SoberInDecimal = 0.00;		//multiple vars needed to calc hours + mins
@@ -65,27 +87,35 @@ function addNewDrink() {
 	}
 	SDTotal = SDTotal + newDrinkSD;
 	calcBAC();
-	if(BAC<0.00){
-		BAC = 0.00;
+	if(newBAC<0.00){
+		newBAC = 0.00;
 	}
 	calcSoberIn();
-	document.getElementById("BACCounter").innerHTML = BAC;
+	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
 	document.getElementById("drinkInputTest").reset();
 }
 
 function calcBAC(){
-	BAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
-	alert(BAC);
+	prevBAC = newBAC;
+	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
+	alert(newBAC);
 	//drawCircle();
 }
 
 function drawCircle(){
-	ctx.beginPath();
-    ctx.arc(125,125,100,-0.5*Math.PI,0.5*(2*Math.PI));
-    ctx.lineWidth=25;
-    ctx.strokeStyle= '#3498db';
-    ctx.stroke();
+	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
+	if(curVal < ((newBAC/0.1)*0.5){
+      curVal+= 0.001;
+    }
+      endAngle = curVal * Math.PI;
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx.lineWidth = 25;
+      // line color
+      ctx.strokeStyle= '#3498db';
+      ctx.stroke();
+    setTimeout(animate,15);
 }
 
 function calcSoberIn(){

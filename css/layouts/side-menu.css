@@ -1,7 +1,34 @@
 body {
     color: white;
-    background-color: black;
+    background-color: #fafafa;
 }
+
+#maps a {
+    text-align: center;
+}
+
+
+#maps ul li {
+    /*list-style-type: none;*/
+    display: inline-block;
+}
+
+.map-box {
+
+}
+
+ol li {
+    cursor: pointer;
+}
+
+#london,
+#south-west,
+#south-central,
+#north,
+#midlands {
+    display: none;
+}
+
 
 .footer {
     background-color: black;
@@ -85,6 +112,7 @@ fieldset {
 
 .content {
     margin-left: 50px;
+    color: #555;
 }
 
 input {

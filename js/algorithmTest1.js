@@ -1,4 +1,4 @@
-alert("JS loaded");
+//alert("JS loaded");
 
 //variables + canvas identifier for the animated blue circle
 var c = document.getElementById("myCanvas");

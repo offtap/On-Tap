@@ -91,7 +91,7 @@ function addNewDrink() {
 
 function calcBAC(){
 	prevBAC = newBAC;
-	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
+	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * genderConstant);
 	//drawCircle();
 }
 

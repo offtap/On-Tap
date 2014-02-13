@@ -30,7 +30,7 @@ var newBAC = 0.00;			//new Blood Alcohol Content after new drink
 var SoberInTotal = 0.00;	//float value for estimated total time till sober
 var SoberInDecimal = 0.00;		//multiple vars needed to calc hours + mins
 var SoberInHours = 0;		//integer value for hours
-var SoberInMins = 0.;		//integer value for mins
+var SoberInMins = 0;		//integer value for mins
 
 var SoberTime = 0.00;		//estimated time when sober
 
@@ -91,12 +91,11 @@ function addNewDrink() {
 
 function calcBAC(){
 	prevBAC = newBAC;
-	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * localStorage.genderConstant);
+	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * genderConstant);
 	//drawCircle();
 }
 
 function drawCircle(){
-
 	//alert("drawCircle works");
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);

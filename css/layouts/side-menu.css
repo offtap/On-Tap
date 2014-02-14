@@ -3,6 +3,26 @@ body {
     background-color: #fafafa;
 }
 
+#boxheading {
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #222;
+    margin-bottom: 22px;
+    display: inline-block;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#main {
+    text-align: center;
+    margin-top: 8%;
+}
+
+#faq {
+    float: left;
+    text-align: left;
+}
+
 #maps a {
     text-align: center;
 }
@@ -171,6 +191,7 @@ padding-right: 1em;
     max-width: 800px;
     margin-bottom: 50px;
     line-height: 1.6em;
+    padding-top: 10px;
 }
 
 .header {
@@ -285,7 +306,7 @@ small screens.
 .menu-link {
     position: fixed;
     display: block; /* show this only on small screens */
-    top: 0;
+    top: 5px;
     left: 0; /* "#menu width" */
     background: #2c3e50;
     background: rgba(0,0,0,0.7);
@@ -333,6 +354,9 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 */
 @media (min-width: 48em) {
 
+    body {
+        overflow: hidden;
+    }
     .header,
     .content {
         padding-left: 2em;

@@ -77,12 +77,15 @@ function addNewDrink() {
 	else if(document.getElementById("drinkType:Spirit").checked) {
 		newDrinkSD = spiritArray[1];
 	}
+	if(SDTotal = 0.00){
+		startTimer();
+	}
 	SDTotal = SDTotal + newDrinkSD;
 	calcBAC();
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
-	drawCircle();
+	drawNewDrink();
 	calcSoberIn();
 	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
@@ -95,7 +98,25 @@ function calcBAC(){
 	//drawCircle();
 }
 
-function drawCircle(){
+function startTimer(){
+	setTimeout(refreshCircle(),10000);
+}
+
+function refreshCircle(){
+	calcBAC();
+	animateTo = (((newBAC/0.1)*2)-0.5);
+	ctx.clearRect(0,0,250,250);
+	ctx.beginPath();
+    ctx.arc(xPos, yPos, radius, startAngle, animateTo, counterClockwise);
+    ctx.lineWidth = 30;
+    ctx.strokeStyle= '#3498db';
+    ctx.stroke();
+    ctx.endPath();
+    setInterval(refreshCircle(),1000);
+
+}
+
+function drawNewDrink(){
 	//alert("drawCircle works");
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
@@ -109,7 +130,7 @@ function drawCircle(){
       // line color
       ctx.strokeStyle= '#3498db';
       ctx.stroke();
-    setTimeout(drawCircle,25);
+    setTimeout(drawNewDrink,25);
 }
 
 function calcSoberIn(){
@@ -123,5 +144,17 @@ function calcSoberTime(){
 	SoberTime = (currentTime+SoberIn); //need to figure out way to use minutes
 }
 
+
+//for timer, leave alone for now please
+
+/*var start = new Date().getMilliseconds();
+
+for (i = 0; i < 50000; ++i) {
+// do something
+}
+
+var end = new Date().getTime();
+var time = end - start;
+alert('Execution time: ' + time);*/
 
 

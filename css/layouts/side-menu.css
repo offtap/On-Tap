@@ -1,8 +1,26 @@
 body {
     color: white;
     background-color: #fafafa;
+    font-family: Nunito,'Lucida Grande',arial,sans-serif;
+    font-weight: 400;
+
 }
 
+
+#box { 
+    background-color: #2c3e50;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
 #boxheading {
     font-size: 12px;
     padding: 10px;
@@ -141,7 +159,7 @@ fieldset {
 
 .content {
     margin-left: 50px;
-    color: #555;
+    color: #111;
 }
 
 input {

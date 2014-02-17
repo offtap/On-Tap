@@ -8,7 +8,20 @@ body {
 
 #socialmedia {
   color: black;
-  font-size: 1.5em;
+  font-size: 1.2em;
+  bottom: 0;
+}
+
+.icon-heart {
+      -webkit-transition: all 2s ease;
+     -moz-transition: all 2s ease;
+       -o-transition: all 2s ease;
+      -ms-transition: all 2s ease;
+          transition: all 2s ease;
+}
+
+.icon-heart:hover {
+    font-size: 5em;
 }
 
 #box { 
@@ -28,11 +41,13 @@ a {
 #boxheading {
     font-size: 12px;
     padding: 10px;
-    border: 1px solid #222;
-    margin-bottom: 22px;
+    border: 1px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
     display: inline-block;
     letter-spacing: 3px;
     text-transform: uppercase;
+    color: white;
 }
 
 #main {

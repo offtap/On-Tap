@@ -8,8 +8,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-
 
 <!--App icons need to be designed and linked here-->
 <!--<link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -61,33 +59,26 @@
 
 
             <div class="header">
-                <div class="content" id="boxheading">
-            Tracker
-        </div>
+                <img id="headimg" src="images/logo3.svg">
             </div>
 
     <div id="main">
             <div class="content">
-
-                <!--<button name='confirmInput' class="newbutton" onClick="calcBAC()" style="margin:10px auto; position:relative; display:block;">BAC PLZ</button>-->
-                <img src="images/circleBackground.png" style="margin: 5px 20px; position:absolute; z-index:1; display:none;" width="250px" height="250px" id="circleBackground">
-                <canvas id="myCanvas" style="margin:5px 20px; z-index:10;" width="250px" height="250px"></canvas>
                 
+                <img src="images/circleBackground.png" style="margin: 5px 20px; position:absolute; z-index:1; display:none;" width="250px" height="250px" id="circleBackground">
+                <canvas id="myCanvas" style="margin:5px 20px; z-index:1;" width="250px" height="250px"></canvas>
+
                 <form class="pure-form pure-form-aligned" id="drinkInputTest" onSubmit="return false;">
                     <fieldset>
                         <div class="pure-control-group">
-                            <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
+                            <p class="inputLabel">Number of drinks<br><input type="number" value="0" id="instantDrinkNo" ></p>
                         </div>
                         <div class="pure-control-group">
-                            <p class="inputLabel">Wine<input type="radio" id="drinkType:Wine" name="drinkType" value="2"></p> 
+                            <p class="inputLabel">Hours since first drink<br><input type="number" value="0" id="instantHoursNo" ></p>
                         </div>
-                        <div class="pure-control-group">
-                            <p class="inputLabel">Spirit<input type="radio" id="drinkType:Spirit" name="drinkType" value="3"></p> 
-                        </div>
-                          
-                        <!--<input type="submit" id="userDataSubmit" class="newbutton" onClick="addNewDrink()">-->
-                        <button name='addDrink' class="newbutton" onClick="addNewDrink()">Add Drink</button>
-                        <input type="reset" id="userDataReset" class="newbutton">
+
+                        <button name='Instant Calculation' class="newbutton" onClick="instantCalc()">Calculate</button>
+                        <input type="reset" id="userDataReset" class="newbutton" onclick="document.getElementById('myCanvas').getContext('2d').clearRect(0,0,250,250)">
                     </fieldset>
                 </form>
 

@@ -5,7 +5,7 @@ var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 	var xPos = 125;			//c.width / 2;
     var yPos = 125;			//c.height / 2;
-    var radius = 100; 
+    var radius = 109; 
     var startAngle = -0.5 * Math.PI;
     var curVal = -0.5;
     var endAngle = 0 * Math.PI;
@@ -57,14 +57,22 @@ function getUserInput(){
 				gender = "female";
 				genderConstant = 5.5;
 			}
-			document.getElementById("greeting").innerHTML = "Hi there, " + userName + "!";
-			document.getElementById("dataCheck").innerHTML = "So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?";
+			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
+			//document.getElementById("greeting").innerHTML = "Hi there, " + userName + "!";
+			//document.getElementById("dataCheck").innerHTML = "So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?";
 			}
 		}
 	else{
 		alert("Please enter a valid username");
 	}
 }
+
+function canvasSetup(){
+	var img = document.getElementById("circleBackground");
+	ctx.drawImage(img,0,0);
+}
+
+canvasSetup();
 
 function addNewDrink() {
 	hoursTotal = hoursTotal + 1;
@@ -77,9 +85,9 @@ function addNewDrink() {
 	else if(document.getElementById("drinkType:Spirit").checked) {
 		newDrinkSD = spiritArray[1];
 	}
-	if(SDTotal = 0.00){
-		startTimer();
-	}
+	//if(SDTotal = 0.00){
+	//	startTimer();
+	//}
 	SDTotal = SDTotal + newDrinkSD;
 	calcBAC();
 	if(newBAC<0.00){
@@ -98,11 +106,11 @@ function calcBAC(){
 	//drawCircle();
 }
 
-function startTimer(){
-	setTimeout(refreshCircle(),10000);
-}
+//function startTimer(){
+//	setTimeout(refreshCircle(),10000);
+//}
 
-function refreshCircle(){
+/*function refreshCircle(){
 	calcBAC();
 	animateTo = (((newBAC/0.1)*2)-0.5);
 	ctx.clearRect(0,0,250,250);
@@ -114,7 +122,7 @@ function refreshCircle(){
     ctx.endPath();
     setInterval(refreshCircle(),1000);
 
-}
+}*/
 
 function drawNewDrink(){
 	//alert("drawCircle works");
@@ -126,9 +134,14 @@ function drawNewDrink(){
       endAngle = curVal * Math.PI;
       ctx.beginPath();
       ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      ctx.lineWidth = 30;
+      ctx.lineWidth = 32;
       // line color
+      if (curVal >= 1.5){
+      	ctx.strokeStyle = '#e74c3c';
+      }
+      else{
       ctx.strokeStyle= '#3498db';
+  	  }
       ctx.stroke();
     setTimeout(drawNewDrink,25);
 }
@@ -144,6 +157,27 @@ function calcSoberTime(){
 	SoberTime = (currentTime+SoberIn); //need to figure out way to use minutes
 }
 
+function instantCalc(){
+	hoursTotal = document.getElementById("instantHoursNo").value;
+	SDTotal = document.getElementById("instantDrinkNo").value;
+	calcBAC();
+	if(newBAC<0.00){
+		newBAC = 0.00;
+	}
+	drawNewDrink();
+	calcSoberIn();
+	document.getElementById("BACCounter").innerHTML = newBAC;
+	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
+	document.getElementById("drinkInputTest").reset();
+}
+
+//below is to clear canvas for instantCalculator when reset buton is clicked
+//not working atm, not sure why... if you see something let me know.
+function clearCanvas(){
+	ctx.clearRect(0,0,250,250);
+	var img = document.getElementById("circleBackground");
+	ctx.drawImage(img,0,0);
+}
 
 //for timer, leave alone for now please
 

@@ -95,6 +95,9 @@ function addNewDrink() {
 	}
 	drawNewDrink();
 	calcSoberIn();
+	ctx.clearRect(60,75,140,100);
+	ctx.font = "50px Arial";
+	ctx.fillText(newBAC.toFixed(3),60,142);
 	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
 	document.getElementById("drinkInputTest").reset();

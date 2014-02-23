@@ -63,7 +63,7 @@
     <div id="main" id="faq">               
         
 
-            <div class="content">
+    <div class="content">
                 <ol>
                     <li><a href="javascript: showAnswer('#london');">How can I download the app to my phone?</a></li>
                     <div id="london">
@@ -96,6 +96,11 @@
                 </ol>
             </div>
             
+         </div>
+             
+         <div class="footer">
+
+
         </div>
             
         <div class="footer">
@@ -110,9 +115,19 @@
 
 
     <script src="js/ui.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
     <script type="text/javascript" src="js/scripts.js"></script>
+    <script>
+    $(document).ready(function(){
+  $(".qhead a").on("click", function(e){
+    e.preventDefault();
+    var href = $(this).attr("href");
+    
+    $(href).fadeToggle(450);
+  });
+});
+    </script>
 
 
 </body>

@@ -93,11 +93,9 @@ function addNewDrink() {
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
+	updateBACreader();
 	drawNewDrink();
 	calcSoberIn();
-	ctx.clearRect(60,75,140,100);
-	ctx.font = "50px Arial";
-	ctx.fillText(newBAC.toFixed(3),60,142);
 	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
 	document.getElementById("drinkInputTest").reset();
@@ -107,6 +105,12 @@ function calcBAC(){
 	prevBAC = newBAC;
 	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * genderConstant);
 	//drawCircle();
+}
+
+function updateBACreader(){
+	ctx.clearRect(60,75,140,100);
+	ctx.font = "50px Arial";
+	ctx.fillText(newBAC.toFixed(3),60,142);
 }
 
 //function startTimer(){
@@ -167,6 +171,7 @@ function instantCalc(){
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
+	updateBACreader();
 	drawNewDrink();
 	calcSoberIn();
 	document.getElementById("BACCounter").innerHTML = newBAC;

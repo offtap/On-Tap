@@ -70,7 +70,9 @@
 
                 <!--<button name='confirmInput' class="newbutton" onClick="calcBAC()" style="margin:10px auto; position:relative; display:block;">BAC PLZ</button>-->
                 <img src="images/circleBackground.png" style="margin: 5px 20px; position:absolute; z-index:1; display:none;" width="250px" height="250px" id="circleBackground">
-                <canvas id="myCanvas" style="margin:5px 20px; z-index:10;" width="250px" height="250px"></canvas>
+                <canvas id="myCanvas" style="margin:5px 20px; z-index:2;" width="250px" height="250px"></canvas>
+                <img src="images/BACindicators.png" style="margin: 5px 20px; position:absolute; z-index:3; display:none;" width="250px" height="250px" id="BACindicators">
+
 
                 <form class="pure-form pure-form-aligned" id="drinkInputTest" onSubmit="return false;">
                     <fieldset>
@@ -91,12 +93,8 @@
                 </form>
 
                 <div id="BACDisplay">
-                    <p class="inputLabel" style="margin: 5px auto;">Your BAC is</p><br>
-                    <p id="BACCounter" class="inputLabel" style="margin: 5px auto;"></p><br><br>
-                    <p class="inputLabel" style="margin: 5px auto;">You will be alcohol-free in approximately</p><br>
-                    <p id="SoberInCounter" class="inputLabel" style="margin: 5px auto;"></p><br><br>
-                    <p class="inputLabel" style="margin: 5px auto;">You will be completely sober at about</p><br>
-                    <p id="SoberTimeCounter" class="inputLabel" style="margin: 5px auto;"></p>
+                    <p id="SoberInCounter" class="inputLabel" style="margin: 5px auto;">Time till sober: --:--</p>
+                    <p id="SoberTimeCounter" class="inputLabel" style="margin: 5px auto;">Sober at: --:--</p>
                 </div>
             </div>
             

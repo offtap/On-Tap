@@ -104,9 +104,8 @@ function addNewDrink() {
 	drawNewDrink();
 	calcSoberIn();
 	calcSoberTime();
-	document.getElementById("BACCounter").innerHTML = newBAC;
-	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
-	document.getElementById("SoberTimeCounter").innerHTML = SoberTimeHours + ":" + SoberTimeMins + " " + AMPM;
+	document.getElementById("SoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
+	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + " " + AMPM;
 	document.getElementById("drinkInputTest").reset();
 }
 
@@ -163,7 +162,9 @@ function drawNewDrink(){
 
 //this function decides what colour the new arc will be
 function getColour(){
-	if (curVal >= 1.5){
+	//if (instantCalc page loaded) {ctx.strokeStyle = '#3498db'; }
+	
+	 if (curVal >= 1.5){
       	ctx.strokeStyle = '#e74c3c';
       }
       else if (document.getElementById("drinkType:Beer").checked){

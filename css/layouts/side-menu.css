@@ -79,6 +79,11 @@ a {
 
 ol li {
     cursor: pointer;
+    color:black;
+}
+
+ol li a{
+    color:black;
 }
 
 #london,

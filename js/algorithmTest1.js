@@ -32,7 +32,12 @@ var SoberInDecimal = 0.00;		//multiple vars needed to calc hours + mins
 var SoberInHours = 0;		//integer value for hours
 var SoberInMins = 0;		//integer value for mins
 
+
+var now = new Date();
+var SoberTimeHours = 0;
+var SoberTimeMins = 0;
 var SoberTime = 0.00;		//estimated time when sober
+var AMPM = "AM";
 
 //awaiting data
 var beerArray = [0.6,0.9,1.2,0.8,1.2,1.6,1.1,1.6,2.2];
@@ -41,29 +46,31 @@ var spiritArray = [0.5,1,2];
 
 var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new drink entered
 
+var animationRefresh;
+
+//function for setting user data from inputs on Signin Page
 function getUserInput(){
-	if(document.getElementById("userName").value.length!=0){
-		if(!(document.getElementById("maleGender").checked)&&(!(document.getElementById("femaleGender").checked))){
+	if(document.getElementById("userName").value.length!=0){	//validating username input 
+		if(!(document.getElementById("maleGender").checked)&&(!(document.getElementById("femaleGender").checked))){		//validating user input for gender and responding
 			alert("Please select your gender");
 		}
 		else{
-			userName = document.getElementById("userName").value;
-			weight = document.getElementById("userWeight").value;
-			if(document.getElementById("maleGender").checked) {
+			userName = document.getElementById("userName").value;	//setting username var to value from form
+			weight = document.getElementById("userWeight").value;	//setting weight var to value from form
+			if(document.getElementById("maleGender").checked) {		// if male set genderConstant = 6.8 for calculations
 				gender = "male";
 				genderConstant = 6.8;
 			}
-			else if(document.getElementById("femaleGender").checked) {
+			else if(document.getElementById("femaleGender").checked) {		// if femmale set genderConstant = 5.5 for calculations
 				gender = "female";
 				genderConstant = 5.5;
 			}
+			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
-			//document.getElementById("greeting").innerHTML = "Hi there, " + userName + "!";
-			//document.getElementById("dataCheck").innerHTML = "So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?";
 			}
 		}
 	else{
-		alert("Please enter a valid username");
+		alert("Please enter a valid username");	//responding if username input = none/invalid
 	}
 }
 
@@ -96,8 +103,10 @@ function addNewDrink() {
 	updateBACreader();
 	drawNewDrink();
 	calcSoberIn();
+	calcSoberTime();
 	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
+	document.getElementById("SoberTimeCounter").innerHTML = SoberTimeHours + ":" + SoberTimeMins + " " + AMPM;
 	document.getElementById("drinkInputTest").reset();
 }
 
@@ -137,20 +146,35 @@ function drawNewDrink(){
 	animateTo = (((newBAC/0.1)*2)-0.5);
 	if(curVal < animateTo){
       curVal+= 0.01;
-    }
       endAngle = curVal * Math.PI;
       ctx.beginPath();
       ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
       ctx.lineWidth = 32;
-      // line color
-      if (curVal >= 1.5){
+      getColour();
+      ctx.stroke();
+    //redo the above block of code till arc reaches end angle
+    animationRefresh = setTimeout(drawNewDrink,25);
+	}
+	//stop the animation refreshing if arc has reached end angle
+	else if (curVal = animateTo){
+		clearTimeout(animationRefresh);
+	}
+}
+
+//this function decides what colour the new arc will be
+function getColour(){
+	if (curVal >= 1.5){
       	ctx.strokeStyle = '#e74c3c';
       }
-      else{
-      ctx.strokeStyle= '#3498db';
+      else if (document.getElementById("drinkType:Beer").checked){
+      	ctx.strokeStyle= '#f1c40f';
   	  }
-      ctx.stroke();
-    setTimeout(drawNewDrink,25);
+  	  else if (document.getElementById("drinkType:Wine").checked){
+  	  	ctx.strokeStyle= '#2ecc71';
+  	  }
+  	  else if (document.getElementById("drinkType:Spirit").checked){
+  	  	ctx.strokeStyle= '#3498db';
+  	  }
 }
 
 function calcSoberIn(){
@@ -161,7 +185,19 @@ function calcSoberIn(){
 }
 
 function calcSoberTime(){
-	SoberTime = (currentTime+SoberIn); //need to figure out way to use minutes
+	var min = now.getMinutes();
+	var hr  = now.getHours();
+	SoberTimeHours = hr + SoberInHours; 
+	//check if hours are past 12 midday
+	if (SoberTimeHours > 12 && SoberTimeHours < 24){
+		SoberTimeHours -= 12;
+		AMPM = "PM";
+	}
+	else if (SoberTimeHours > 24){
+		SoberTimeHours -= 24;
+		AMPM = "AM";
+	}
+	SoberTimeMins = min + SoberInMins; //need to figure out way to use minutes
 }
 
 function instantCalc(){

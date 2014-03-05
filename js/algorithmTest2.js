@@ -1,10 +1,10 @@
 //alert("JS loaded");
 
 //variables + canvas identifier for the animated blue circle
-var c = document.getElementById("myCanvas");
+var c = document.getElementById("myCanvasFront");
 var ctx = c.getContext("2d");
-	var xPos = 125;			//c.width / 2;
-    var yPos = 125;			//c.height / 2;
+	var xPos = ctx.width / 2;
+    var yPos = ctx.height / 2;
     var radius = 109; 
     var startAngle = -0.5 * Math.PI;
     var curVal = -0.5;
@@ -41,33 +41,35 @@ var spiritArray = [0.5,1,2];
 
 var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new drink entered
 
+//function for setting user data from inputs on Signin Page
 function getUserInput(){
-	if(document.getElementById("userName").value.length!=0){
-		if(!(document.getElementById("maleGender").checked)&&(!(document.getElementById("femaleGender").checked))){
+	if(document.getElementById("userName").value.length!=0){	//validating username input 
+		if(!(document.getElementById("maleGender").checked)&&(!(document.getElementById("femaleGender").checked))){		//validating user input for gender and responding
 			alert("Please select your gender");
 		}
 		else{
-			userName = document.getElementById("userName").value;
-			weight = document.getElementById("userWeight").value;
-			if(document.getElementById("maleGender").checked) {
+			userName = document.getElementById("userName").value;	//setting username var to value from form
+			weight = document.getElementById("userWeight").value;	//setting weight var to value from form
+			if(document.getElementById("maleGender").checked) {		// if male set genderConstant = 6.8 for calculations
 				gender = "male";
 				genderConstant = 6.8;
 			}
-			else if(document.getElementById("femaleGender").checked) {
+			else if(document.getElementById("femaleGender").checked) {		// if femmale set genderConstant = 5.5 for calculations
 				gender = "female";
 				genderConstant = 5.5;
 			}
+			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
-			//document.getElementById("greeting").innerHTML = "Hi there, " + userName + "!";
-			//document.getElementById("dataCheck").innerHTML = "So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?";
 			}
 		}
 	else{
-		alert("Please enter a valid username");
+		alert("Please enter a valid username");	//responding if username input = none/invalid
 	}
 }
 
 function canvasSetup(){
+	var c = document.getElementById("myCanvasBack");
+	var ctx = c.getContext("2d");
 	var img = document.getElementById("circleBackground");
 	ctx.drawImage(img,0,0);
 }
@@ -132,46 +134,23 @@ function updateBACreader(){
 }*/
 
 function drawNewDrink(){
-	//alert("drawCircle works");
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
 	if(curVal < animateTo){
       curVal+= 0.01;
     }
       endAngle = curVal * Math.PI;
-      if (prevBAC < 0.1 && newBAC >= 0.1){
-      	animateTo = 1.5;
-      	ctx.beginPath();
-      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      	ctx.lineWidth = 32;
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx.lineWidth = 31;
+      // line color
+      if (curVal >= 1.5){
       	ctx.strokeStyle = '#e74c3c';
-      	ctx.stroke();
-      	ctx.endPath();
-      	startAngle = 1.5;
-      	animateTo = (((newBAC/0.1)*2)-0.5);
-      	ctx.beginPath();
-      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      	ctx.lineWidth = 32;
-      	ctx.strokeStyle = '#3498db';
-      	ctx.stroke();
-      	ctx.endPath();
-      }
-      else if (prevBAC > 0.1){
-      	ctx.beginPath();
-      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      	ctx.lineWidth = 32;
-      	ctx.strokeStyle = '#e74c3c';
-      	ctx.stroke();
-      	ctx.endPath();
       }
       else{
-      	ctx.beginPath();
-      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      	ctx.lineWidth = 32;
-      	ctx.strokeStyle= '#3498db';
-      	ctx.stroke();
-      	ctx.endPath();
+      ctx.strokeStyle= '#3498db';
   	  }
+      ctx.stroke();
     setTimeout(drawNewDrink,25);
 }
 
@@ -220,3 +199,5 @@ for (i = 0; i < 50000; ++i) {
 var end = new Date().getTime();
 var time = end - start;
 alert('Execution time: ' + time);*/
+
+

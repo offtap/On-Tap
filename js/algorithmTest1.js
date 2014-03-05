@@ -105,7 +105,7 @@ function addNewDrink() {
 	calcSoberIn();
 	calcSoberTime();
 	document.getElementById("SoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
-	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + " " + AMPM;
+	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + AMPM;
 	document.getElementById("drinkInputTest").reset();
 }
 
@@ -194,9 +194,13 @@ function calcSoberTime(){
 		SoberTimeHours -= 12;
 		AMPM = "PM";
 	}
-	else if (SoberTimeHours > 24){
+	else if (SoberTimeHours >= 24 && SoberTimeHours < 36){
 		SoberTimeHours -= 24;
 		AMPM = "AM";
+	}
+	else if (SoberTimeHours >= 36){
+		SoberTimeHours -= 34;
+		AMPM = "PM Tomorrow";
 	}
 	SoberTimeMins = min + SoberInMins; //need to figure out way to use minutes
 }

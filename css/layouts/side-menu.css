@@ -77,12 +77,12 @@ a {
 
 }
 
-ol li {
+#FAQlist li {
     cursor: pointer;
     color:black;
 }
 
-ol li a{
+#FAQlist li a{
     color:black;
 }
 

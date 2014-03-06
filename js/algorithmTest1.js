@@ -1,8 +1,16 @@
 //alert("JS loaded");
 
-//variables + canvas identifier for the animated blue circle
-var c = document.getElementById("myCanvas");
+//CANVAS LAYERS SETUP
+var c1 = document.getElementById("canvas1");
+var ctx1 = c1.getContext("2d");
+
+var c = document.getElementById("canvas2");
 var ctx = c.getContext("2d");
+
+var c3 = document.getElementById("canvas3");
+var ctx3 = c3.getContext("2d");
+
+	//arc variables
 	var xPos = 125;			//c.width / 2;
     var yPos = 125;			//c.height / 2;
     var radius = 109; 
@@ -39,14 +47,10 @@ var SoberTimeMins = 0;
 var SoberTime = 0.00;		//estimated time when sober
 var AMPM = "AM";
 
-//awaiting data
-var beerArray = [0.6,0.9,1.2,0.8,1.2,1.6,1.1,1.6,2.2];
-var wineArray = [1,1.5,0.9,1.4,1.4];
-var spiritArray = [0.5,1,2];
-
 var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new drink entered
 
 var animationRefresh;
+var animationRefresh2;
 
 //function for setting user data from inputs on Signin Page
 function getUserInput(){
@@ -83,35 +87,21 @@ canvasSetup();
 
 function addNewDrink() {
 	hoursTotal = hoursTotal + 1;
-	if(document.getElementById("drinkType:Beer").checked) {
-		newDrinkSD = beerArray[2];
-	}
-	else if(document.getElementById("drinkType:Wine").checked) {
-		newDrinkSD = wineArray[1];
-	}
-	else if(document.getElementById("drinkType:Spirit").checked) {
-		newDrinkSD = spiritArray[1];
-	}
-	//if(SDTotal = 0.00){
-	//	startTimer();
-	//}
-	SDTotal = SDTotal + newDrinkSD;
+	getDrink();
 	calcBAC();
-	if(newBAC<0.00){
-		newBAC = 0.00;
-	}
 	updateBACreader();
 	drawNewDrink();
 	calcSoberIn();
 	calcSoberTime();
-	document.getElementById("SoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
-	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + AMPM;
-	document.getElementById("drinkInputTest").reset();
+	updateStats();
 }
 
 function calcBAC(){
 	prevBAC = newBAC;
 	newBAC = ((SDTotal * 10)-(hoursTotal * 7.5))/(weight * genderConstant);
+	if(newBAC<0.00){
+		newBAC = 0.00;
+	}
 	//drawCircle();
 }
 
@@ -121,31 +111,43 @@ function updateBACreader(){
 	ctx.fillText(newBAC.toFixed(3),60,142);
 }
 
-//function startTimer(){
-//	setTimeout(refreshCircle(),10000);
-//}
+function updateStats(){
+	document.getElementById("SoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
+	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + AMPM;
+	document.getElementById("drinkInputTest").reset();
+}
 
-/*function refreshCircle(){
-	calcBAC();
+function drawTest(){
+	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
-	ctx.clearRect(0,0,250,250);
-	ctx.beginPath();
-    ctx.arc(xPos, yPos, radius, startAngle, animateTo, counterClockwise);
-    ctx.lineWidth = 30;
-    ctx.strokeStyle= '#3498db';
-    ctx.stroke();
-    ctx.endPath();
-    setInterval(refreshCircle(),1000);
-
-}*/
+	checkCrossover();
+	if(curVal < animateTo){
+      curVal+= 0.01;
+      endAngle = curVal * Math.PI;
+      ctx3.beginPath();
+      ctx3.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx3.lineWidth = 32;
+      ctx3.strokeStyle = '#e74c3c'
+      ctx3.stroke();
+    //redo the above block of code till arc reaches end angle
+    animationRefresh2 = setTimeout(drawTest,25);
+	}
+	}
 
 function drawNewDrink(){
 	//alert("drawCircle works");
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
-	if(curVal < animateTo){
+	if (curVal >=1.5){
+		clearTimeout(animationRefresh);
+		drawTest();
+	}
+	else if(curVal < animateTo){
       curVal+= 0.01;
       endAngle = curVal * Math.PI;
+      if(prevBAC < 0.1 && newBAC >= 0.1){
+			endAngle = 1.5 * Math.PI;
+		}
       ctx.beginPath();
       ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
       ctx.lineWidth = 32;
@@ -163,11 +165,7 @@ function drawNewDrink(){
 //this function decides what colour the new arc will be
 function getColour(){
 	//if (instantCalc page loaded) {ctx.strokeStyle = '#3498db'; }
-	
-	 if (curVal >= 1.5){
-      	ctx.strokeStyle = '#e74c3c';
-      }
-      else if (document.getElementById("drinkType:Beer").checked){
+      if (document.getElementById("drinkType:Beer").checked){
       	ctx.strokeStyle= '#f1c40f';
   	  }
   	  else if (document.getElementById("drinkType:Wine").checked){
@@ -178,6 +176,13 @@ function getColour(){
   	  }
 }
 
+function checkCrossover(){
+	if (prevBAC < 0.1 && newBAC >= 0.1){
+		startAngle = 1.5 * Math.PI;
+	}
+}
+
+//calculate an approximate duration of time after which user will be sober
 function calcSoberIn(){
 	SoberInTotal = (SDTotal*10)/7.5;
 	SoberInDecimal = SoberInTotal%1;
@@ -185,11 +190,28 @@ function calcSoberIn(){
 	SoberInMins = Math.round(SoberInDecimal*60);
 }
 
+//calculate the approx local time of user sobriety
 function calcSoberTime(){
 	var min = now.getMinutes();
 	var hr  = now.getHours();
 	SoberTimeHours = hr + SoberInHours; 
+	SoberTimeMins = min + SoberInMins; //need to figure out way to use minutes
+	//check if mins are equal to or over 60
+	verifyMins();
 	//check if hours are past 12 midday
+	AMPMCheck();
+}
+
+//check that minute counter for SoberTime does not exceed 59mins
+function verifyMins(){
+	if(SoberTimeMins >= 60){
+		SoberTimeMins = SoberTimeMins-60;
+		SoberTimeHours++;
+	}
+}
+
+//check if time is AM or PM, as well as ensure hours counter does not exceed 12
+function AMPMCheck(){
 	if (SoberTimeHours > 12 && SoberTimeHours < 24){
 		SoberTimeHours -= 12;
 		AMPM = "PM";
@@ -202,9 +224,9 @@ function calcSoberTime(){
 		SoberTimeHours -= 34;
 		AMPM = "PM Tomorrow";
 	}
-	SoberTimeMins = min + SoberInMins; //need to figure out way to use minutes
 }
 
+//do calculation for instantaneous BAC approximation
 function instantCalc(){
 	hoursTotal = document.getElementById("instantHoursNo").value;
 	SDTotal = document.getElementById("instantDrinkNo").value;
@@ -218,14 +240,6 @@ function instantCalc(){
 	document.getElementById("BACCounter").innerHTML = newBAC;
 	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
 	document.getElementById("drinkInputTest").reset();
-}
-
-//below is to clear canvas for instantCalculator when reset buton is clicked
-//not working atm, not sure why... if you see something let me know.
-function clearCanvas(){
-	ctx.clearRect(0,0,250,250);
-	var img = document.getElementById("circleBackground");
-	ctx.drawImage(img,0,0);
 }
 
 //for timer, leave alone for now please

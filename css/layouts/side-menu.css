@@ -10,6 +10,38 @@ body {
     display: none;
 }
 
+
+#socialmedia {
+  color: black;
+  font-size: 1.2em;
+  bottom: 0;
+}
+
+img {
+
+    max-width: 80%;
+}
+
+
+video{
+    min-width: 120vw;
+    min-height: 100%;
+    margin-left: -10%;
+    position: fixed;
+
+    
+}
+
+#video_overlays {
+position:absolute;
+    text-align: center;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    width:100%;
+    min-height:370px;
+    z-index:300000;
+}
+
 #socialmedia {
   color: black;
   font-size: 1.2em;
@@ -200,6 +232,7 @@ input {
 
 #menuLink {
     background-color: transparent;
+    display: none;
 }
 /*
 Add transition to containers so they can push in and out.

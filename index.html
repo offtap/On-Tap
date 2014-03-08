@@ -31,7 +31,21 @@
 </head>
 <body>
 
-
+<div id="container">
+         <div id="video_overlays">
+        <img src="images/logo4.svg">
+        <p>
+        <p>
+        <button name='Enter Site' class="newbutton" onClick="removeSplash()">ENTER SITE</button>
+        </div>
+        
+        <video height:'auto' overflow: hidden; autoplay="autoplay" loop> //EDIT: loop="true" is deprecated nowadays
+        <source src="images/ontap.mp4" type="video/mp4" />
+        <source src="images/ontap.ogv" type="video/ogv" />
+        <source src="images/ontap.webm" type="video/webm" />
+        Your browser does not support the video tag.
+        </video>
+</div>
 
 <div id="layout">
     <!-- Menu toggle -->
@@ -275,7 +289,7 @@
     </div>
 </div>
 
-
+<script src="js/splash.js"></script>
 <script src="js/algorithmTest1.js"></script>
 <script src="js/drinkLib.js"></script>
 <script src="js/ui.js"></script>

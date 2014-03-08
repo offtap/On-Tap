@@ -120,22 +120,28 @@
                 </div>
             </div>
     </div>
-
-<div id="beer"><div class="pure-control-group">
+   
+    <div id="items">
+        <div id="item1" class="contentItem">
+        <div class="pure-control-group">
                             <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
-                        </div>
-                        <div class="pure-control-group">
+        </div>
+        <div class="pure-control-group">
                             <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
-                        </div>
-                        <div class="pure-control-group">
+        </div>
+        <div class="pure-control-group">
                             <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
-                        </div>
-                    </div>
-<footer>
-<a href="#" onclick="toggle_visibility('beer');"><span style="color:black">Beer</span></a>
-
-<footer>
-
+        </div>
+        </div>
+        <div id="item2" class="contentItem contentItemVisible">Item 2</div>
+        <div id="item3" class="contentItem">Item 3</div>
+    </div>
+    <nav>
+        <div id="show1" data-target="item1">Show 1</div>
+        <div id="show2" data-target="item2" class="toggled">Show 2</div>
+        <div id="show3" data-target="item3">Show 3</div>
+    </nav>
+    
 </div>
 
 
@@ -327,14 +333,28 @@
     return false;//stop default behavior of link
 });</script>
 
+
 <script>
-    function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-    }
+$(function() {
+    
+    $("nav div").click(function() {
+       
+        /*
+        $("nav div").each(function(index) {           
+           $(this).removeClass("toggled"); 
+        });
+        */
+        
+        $(this).toggleClass("toggled");
+        
+        $( "#" + $(this).attr("data-target") ).toggleClass("contentItemVisible");
+    });
+    
+    
+    
+});
+
+
     </script>
 
 </body>

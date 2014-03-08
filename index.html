@@ -60,7 +60,7 @@
             <a class="pure-menu-heading" href="#"><img src="images/logo3.svg" width="50"></a><p>
 
             <ul id="tapMe">
-                <li id="menuLink"><a href="#" data-href="b">Sign-up</a></li>
+                <li><a href="#" data-href="b">Sign-up</a></li>
 
                 <li class="menu-item-divided pure-menu-selected">
                     <a href="#" data-href="a">Tracker</a>
@@ -120,6 +120,22 @@
                 </div>
             </div>
     </div>
+
+<div id="beer"><div class="pure-control-group">
+                            <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
+                        </div>
+                        <div class="pure-control-group">
+                            <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
+                        </div>
+                        <div class="pure-control-group">
+                            <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
+                        </div>
+                    </div>
+<footer>
+<a href="#" onclick="toggle_visibility('beer');"><span style="color:black">Beer</span></a>
+
+<footer>
+
 </div>
 
 
@@ -146,15 +162,11 @@
                             <p class="inputLabel">Weight (kgs)<br><input type="range" value="60" min="40" max="120" id="userWeight" ><p class="inputLabel"></p>
                         </div>
 
-                        <div class="pure-control-group">
-                            <p class="inputLabel">I am driving<br><input type="checkbox" id="driverCheckBox" ><p class="inputLabel"></p>
-                        </div>
-
                         
                         <!-- need to learn how to make profile pic-->
                         <!--<p class="inputLabel">Choose a profile picture:</p> <input type="file" accept="image/*" class="newbutton" id="capture" capture="camera">-->
                           
-                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="getUserInput()">
+                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="getUserInput()"> 
                         <input type="reset" id="userDataReset" class="newbutton">
                     </fieldset>
                 </form>
@@ -315,6 +327,15 @@
     return false;//stop default behavior of link
 });</script>
 
+<script>
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+    </script>
 
 </body>
 </html>

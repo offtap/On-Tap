@@ -17,7 +17,8 @@ var ctx3 = c3.getContext("2d");
     var startAngle = -0.5 * Math.PI;
     var curVal = -0.5;
     var endAngle = 0 * Math.PI;
-    var counterClockwise = false;
+    var clockWise = false;
+    var counterClockwise = true;
     var animateTo = 0.00;
 
 //variables set by the signup form                    
@@ -27,11 +28,15 @@ var gender = "unknown";				//user-defined gender
 var genderConstant = 6.8;			//gender constant depending on gender (default=male, 6.8)
 var desDriver = false;
 
+var BACLostHourly = 0.00;
+var BACLost15Mins = 0.00;
+
 //BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
 
 //BAC variables
+var BACAfterBurn = 0.00;
 var prevBAC = 0.00;			//BAC before new drink
 var newBAC = 0.00;			//new Blood Alcohol Content after new drink
 
@@ -47,11 +52,13 @@ var SoberTimeHours = 0;
 var SoberTimeMins = 0;
 var SoberTime = 0.00;		//estimated time when sober
 var AMPM = "AM";
+var extraZero = "";			//extra zero if SoberTimeMins returns a single digit number
 
 var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new drink entered
 
 var animationRefresh;
 var animationRefresh2;
+var burningRefresh;
 
 //function for setting user data from inputs on Signin Page
 function getUserInput(){
@@ -64,6 +71,7 @@ function getUserInput(){
 			weight = document.getElementById("userWeight").value;	//setting weight var to value from form
 			setGender();
 			setDriver();
+			setBACLost();
 			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
 			}
@@ -93,6 +101,53 @@ function setDriver(){
 	}
 }
 
+function setBACLost(){
+	BACLostHourly = ((7.5)/(weight*genderConstant));
+	BACLost15Mins = BACLostHourly*0.25;
+	alert(BACLostHourly);
+	alert(BACLost15Mins);
+	//var BACburning = setInterval(updateBACBurnt(),900000);
+}
+
+//DONT TOUCH, BAC COUNTDOWN FUNCTIONALITY WIP
+/*function burnBAC(){
+	alert("newBAC =" + newBAC);
+	alert("prevBAC = " + prevBAC)
+	BACAfterBurn = newBAC - BACLost15Mins;
+	prevBAC = newBAC;
+	newBAC = BACAfterBurn; 
+	alert("BAC AfterBurn" + BACAfterBurn);
+	alert("newBAC =" + newBAC);
+	alert("prevBAC = " + prevBAC)
+
+	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
+	animateTo = (((newBAC/0.1)*2)-0.5);
+	//if (curVal >=1.5){
+		//clearTimeout(burningRefresh);
+		//burnTopLayer();
+	//}
+	//else {
+		if(curVal > animateTo){
+      	curVal-= 0.01;
+      	endAngle = curVal * Math.PI;
+      	if(prevBAC > 0.1 && newBAC <= 0.1){
+			endAngle = 1.5 * Math.PI;
+		}
+      	ctx.beginPath();
+      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      	ctx.lineWidth = 32;
+      	ctx.globalCompositeOperation="destination-out";
+      	ctx.strokeStyle = '#e74c3c';
+      	ctx.stroke();
+    	//redo the above block of code till arc reaches end angle
+    	burningRefresh = setTimeout(updateBACBurnt,25);
+		}
+		//stop the animation refreshing if arc has reached end angle
+		else if (curVal = animateTo){
+		clearTimeout(burningRefresh);
+		}
+}*/
+
 function canvasSetup(){
 	var img = document.getElementById("circleBackground");
 	ctx.drawImage(img,0,0);
@@ -117,7 +172,6 @@ function calcBAC(){
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
-	//drawCircle();
 }
 
 function updateBACreader(){
@@ -128,7 +182,7 @@ function updateBACreader(){
 
 function updateStats(){
 	document.getElementById("SoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
-	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + SoberTimeMins + AMPM;
+	document.getElementById("SoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + extraZero + SoberTimeMins + AMPM;
 	document.getElementById("drinkInputTest").reset();
 }
 
@@ -140,17 +194,19 @@ function drawTest(){
       curVal+= 0.01;
       endAngle = curVal * Math.PI;
       ctx3.beginPath();
-      ctx3.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx3.arc(xPos, yPos, radius, startAngle, endAngle, clockWise);
       ctx3.lineWidth = 32;
       ctx3.strokeStyle = '#e74c3c'
       ctx3.stroke();
     //redo the above block of code till arc reaches end angle
     animationRefresh2 = setTimeout(drawTest,25);
 	}
+	else if (curVal = animateTo){
+		clearTimeout(animationRefresh2);
+	}
 	}
 
 function drawNewDrink(){
-	//alert("drawCircle works");
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
 	if (curVal >=1.5){
@@ -164,7 +220,7 @@ function drawNewDrink(){
 			endAngle = 1.5 * Math.PI;
 		}
       ctx.beginPath();
-      ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, clockWise);
       ctx.lineWidth = 32;
       getColour();
       ctx.stroke();
@@ -228,6 +284,7 @@ function calcSoberTime(){
 	SoberTimeMins = min + SoberInMins; //need to figure out way to use minutes
 	//check if mins are equal to or over 60
 	verifyMins();
+	singleDigitCheck();
 	//check if hours are past 12 midday
 	AMPMCheck();
 }
@@ -253,6 +310,15 @@ function AMPMCheck(){
 	else if (SoberTimeHours >= 36){
 		SoberTimeHours -= 34;
 		AMPM = "PM Tomorrow";
+	}
+}
+
+function singleDigitCheck(){
+	if(SoberTimeMins >= 0 && SoberTimeMins < 10){
+		extraZero = "0";
+	}
+	else{
+		extraZero = "";
 	}
 }
 

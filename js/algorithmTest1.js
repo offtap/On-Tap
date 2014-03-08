@@ -25,6 +25,7 @@ var userName = "Your name here";	//user defined name
 var weight = 60;					//user defined weight
 var gender = "unknown";				//user-defined gender
 var genderConstant = 6.8;			//gender constant depending on gender (default=male, 6.8)
+var desDriver = false;
 
 //BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
@@ -61,20 +62,34 @@ function getUserInput(){
 		else{
 			userName = document.getElementById("userName").value;	//setting username var to value from form
 			weight = document.getElementById("userWeight").value;	//setting weight var to value from form
-			if(document.getElementById("maleGender").checked) {		// if male set genderConstant = 6.8 for calculations
-				gender = "male";
-				genderConstant = 6.8;
-			}
-			else if(document.getElementById("femaleGender").checked) {		// if femmale set genderConstant = 5.5 for calculations
-				gender = "female";
-				genderConstant = 5.5;
-			}
+			setGender();
+			setDriver();
 			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
 			}
 		}
 	else{
 		alert("Please enter a valid username");	//responding if username input = none/invalid
+	}
+}
+
+function setGender(){
+	if(document.getElementById("maleGender").checked) {		// if male set genderConstant = 6.8 for calculations
+		gender = "male";
+		genderConstant = 6.8;
+	}
+	else if(document.getElementById("femaleGender").checked) {		// if femmale set genderConstant = 5.5 for calculations
+		gender = "female";
+		genderConstant = 5.5;
+	}
+}
+
+function setDriver(){
+	if(document.getElementById("driverCheckBox").checked) {	
+		desDriver = true;
+	}
+	else{		
+		desDriver = false;
 	}
 }
 
@@ -165,7 +180,10 @@ function drawNewDrink(){
 //this function decides what colour the new arc will be
 function getColour(){
 	//if (instantCalc page loaded) {ctx.strokeStyle = '#3498db'; }
-      if (document.getElementById("drinkType:Beer").checked){
+	if (desDriver){
+		desDriverColour();
+	}
+   	  else if (document.getElementById("drinkType:Beer").checked){
       	ctx.strokeStyle= '#f1c40f';
   	  }
   	  else if (document.getElementById("drinkType:Wine").checked){
@@ -174,6 +192,18 @@ function getColour(){
   	  else if (document.getElementById("drinkType:Spirit").checked){
   	  	ctx.strokeStyle= '#3498db';
   	  }
+}
+
+function desDriverColour(){
+	if(newBAC < 0.03){
+		ctx.strokeStyle= '#2ecc71';
+	}
+	else if(0.03 < newBAC && newBAC <= 0.04){
+		ctx.strokeStyle= '#f1c40f';
+	}
+	else if(0.04 < newBAC){
+		ctx.strokeStyle = '#e74c3c';
+	}
 }
 
 function checkCrossover(){

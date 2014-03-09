@@ -3,16 +3,208 @@ body {
     background-color: #fafafa;
     font-family: Nunito,'Lucida Grande',arial,sans-serif;
     font-weight: 400;
-
+    height: 100%;
+    overflow:hidden;
 }
 
 .content_div {
     display: none;
 }
 
+.pure-control-group1 {
+    display: inline-block;
+}
+
+canvas {
+    z-index: 1;
+}
+
+/*START OF BEERNAV CSS*/
+
+label[for="beer-menu-toggle"] {
+    cursor: pointer;
+    overflow: hidden;
+    width: 100px;
+    position: fixed;
+    bottom: 30px;
+    left: 12%;
+    z-index: 1;
+}
+
+#beer-menu-toggle { /* goes off the canvas */
+    bottom: 10px;
+    left:10px;
+    position: fixed;
+    -webkit-appearance: none;
+}
+
+#beermenu {
+    box-sizing: border-box;
+    display: block;
+    /*float: left;*/
+    position:absolute;
+    overflow: hidden;
+    padding: 1em 0;
+    -webkit-transition: all .25s ease-in;
+}
+
+#beermenu {
+    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-repeat: repeat;
+    opacity: .8;
+    clear: left;
+    color: #fff;
+    min-height: 100%;
+    width: 100%;
+}
+
+/* 
+ * For decent browsers only.
+ * Delete to test fallback.
+ */
+
+#beer-menu-toggle:not(:checked) ~ #beermenu { 
+    margin-top: 140%;
+     width: 100%;
+}
+
+#beer-menu-toggle:checked ~ #beermenu {
+    width: 100%;
+    margin-left: 0;
+    margin-top:300px;
+}
+
+#beericons {
+    padding:0 0 0 15%;
+}
+
+/*END OF BEERNAV CSS*/
 
 
-#   
+/*START OF WINENAV CSS*/
+
+label[for="wine-menu-toggle"] {
+
+    cursor: pointer;
+    overflow: hidden;
+    width: 100px;
+    position: fixed;
+    bottom: 30px;
+    left: 43%;
+    z-index: 1; 
+}
+
+#wine-menu-toggle { /* goes off the canvas */
+    bottom: 10px;
+    left:10px;
+    position: fixed;
+    -webkit-appearance: none;
+}
+
+#winemenu {
+    box-sizing: border-box;
+    display: block;
+    /*float: left;*/
+    position:absolute;
+    overflow: hidden;
+    padding: 1em 0;
+    -webkit-transition: all .25s ease-in;
+}
+
+#winemenu {
+    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-repeat: repeat;
+    opacity: .8;
+    clear: left;
+    color: #fff;
+    min-height: 100%;
+    width: 100%;
+}
+
+/* 
+ * For decent browsers only.
+ * Delete to test fallback.
+ */
+
+#wine-menu-toggle:not(:checked) ~ #winemenu { 
+    margin-top: 140%;
+     width: 100%;
+}
+
+#wine-menu-toggle:checked ~ #winemenu {
+    width: 100%;
+    margin-left: 0;
+    margin-top:300px;
+}
+
+#wineicons {
+    padding:0 0 0 15%;
+}
+
+/*END OF WINENAV CSS*/
+
+/*START OF WINENAV CSS*/
+
+
+label[for="spirit-menu-toggle"] {
+    cursor: pointer;
+    overflow: hidden;
+    width: 100px;
+    position: fixed;
+    bottom: 30px;
+    left: 75%;
+    z-index: 1;
+}
+
+#spirit-menu-toggle { /* goes off the canvas */
+    bottom: 10px;
+    left:10px;
+    position: fixed;
+    -webkit-appearance: none;
+}
+
+#spiritmenu {
+    box-sizing: border-box;
+    display: block;
+    /*float: left;*/
+    position:absolute;
+    overflow: hidden;
+    padding: 1em 0;
+    -webkit-transition: all .25s ease-in;
+}
+
+#spiritmenu {
+    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-repeat: repeat;
+    opacity: .8;
+    clear: left;
+    color: #fff;
+    min-height: 100%;
+    width: 100%;
+}
+
+/* 
+ * For decent browsers only.
+ * Delete to test fallback.
+ */
+
+#spirit-menu-toggle:not(:checked) ~ #spiritmenu { 
+    margin-top: 140%;
+     width: 100%;
+}
+
+#spirit-menu-toggle:checked ~ #spiritmenu {
+    width: 100%;
+    margin-left: 0;
+    margin-top:300px;
+}
+
+#spiriticons {
+    padding:0 0 0 15%;
+}
+
+/*END OF WINENAV CSS*/
+
 
 #socialmedia {
   color: black;
@@ -157,6 +349,7 @@ h2 {
 /* input form buttons */
 input[type=radio] {
     display: inline-block;
+    z-index: 10000;
 }
 
 input#userWeight2 {
@@ -200,6 +393,7 @@ transition: all .3s;
 border: 1px solid #888;
 color: #555;
 padding: 10px 20px;
+z-index: 10001;
 }
 
 .newbutton1 {
@@ -214,6 +408,7 @@ transition: all .3s;
 border: 1px solid white;
 color: white;
 padding: 10px 20px;
+z-index: 100002;
 }
 
 fieldset {
@@ -295,7 +490,7 @@ padding-right: 1em;
 }
 
 .header {
-     margin: 0;
+     margin-top: 15px;
      background-color: #2c3e50;
      text-align: center;
  }
@@ -406,7 +601,7 @@ small screens.
 .menu-link {
     position: fixed;
     display: block; /* show this only on small screens */
-    top: 5px;
+    top:22px;
     left: 0; /* "#menu width" */
     background: #2c3e50;
     background: rgba(0,0,0,0.7);

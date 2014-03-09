@@ -80,9 +80,15 @@ function setUp(){
 			setGender();
 			setDriver();
 			setBACLost();
-			
+			if(!(document.getElementById("EUA").checked)){
+				alert("Please indicate that you have read and understood our disclaimer");
+			}
+			else{
 			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
+			document.getElementById('b').style.display='none';
+			document.getElementById('a').style.display='block';
+			}
 			}
 		}
 	else{

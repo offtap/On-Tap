@@ -47,7 +47,7 @@ label[for="beer-menu-toggle"] {
     overflow: hidden;
     width: 100px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     left: 8%;
     z-index: 1;
 }
@@ -110,7 +110,7 @@ label[for="wine-menu-toggle"] {
     overflow: hidden;
     width: 100px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     left: 41%;
     z-index: 1; 
 }
@@ -172,7 +172,7 @@ label[for="spirit-menu-toggle"] {
     overflow: hidden;
     width: 100px;
     position: fixed;
-    bottom: 10px;
+    bottom: 5px;
     left: 75%;
     z-index: 1;
 }
@@ -233,9 +233,13 @@ label[for="spirit-menu-toggle"] {
   bottom: 0;
 }
 
+#logo_splash {
+    max-width: 80%;
+}
+
 img {
 
-    max-width: 80%;
+    max-width: 75%;
 }
 
 

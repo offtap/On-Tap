@@ -165,7 +165,7 @@ function getSessionDuration(){
 }
 
 function addNewDrink() {
-	getSessionDuration();
+	//getSessionDuration();
 	alert(hoursTotal);
 	//hoursTotal = hoursTotal + 1;
 	getDrink();
@@ -344,9 +344,7 @@ function instantCalc(){
 	updateBACreader();
 	drawNewDrink();
 	calcSoberIn();
-	document.getElementById("BACCounter").innerHTML = newBAC;
-	document.getElementById("SoberInCounter").innerHTML = SoberInHours + " hrs " + SoberInMins + " mins";
-	document.getElementById("drinkInputTest").reset();
+	updateStats();
 }
 
 //for timer, leave alone for now please

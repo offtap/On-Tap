@@ -77,8 +77,7 @@ function setUp(){
 			setGender();
 			setDriver();
 			setBACLost();
-			var timerSetup = now.getTime();
-			sessionStart = timerSetup;
+			
 			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
 			}
@@ -86,6 +85,12 @@ function setUp(){
 	else{
 		alert("Please enter a valid username");	//responding if username input = none/invalid
 	}
+}
+
+function setStartTime(){
+	var startHours = now.getHours();
+	var startMins = now.getMinutes();
+	sessionStart = timerSetup;
 }
 
 function setGender(){
@@ -156,18 +161,7 @@ function canvasSetup(){
 canvasSetup();
 
 function getSessionDuration(){
-	var currentTime = now.getTime();
-	alert("sStart = " + sessionStart);
-	alert("currTime = " + currentTime);
-	durationMillis = currentTime - sessionStart;
-	alert("dMillis = " + durationMillis);
-	durationHours = (((durationMillis/1000)/60)/60);
-	alert("dHours = " + durationHours);
-	hoursTotal = durationHours.toFixed(3);
-	alert("hoursTotal = " + hoursTotal);
-	//if (hoursTotal < 1){
-	//	hoursTotal = 1;
-	//}
+	
 }
 
 function addNewDrink() {

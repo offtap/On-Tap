@@ -31,6 +31,11 @@ var desDriver = false;
 var BACLostHourly = 0.00;
 var BACLost15Mins = 0.00;
 
+//Session duration timer variables
+var sessionStart = 0;
+var durationMillis = 0;
+var durationHours = 0;
+
 //BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
@@ -58,10 +63,10 @@ var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new dri
 
 var animationRefresh;
 var animationRefresh2;
-var burningRefresh;
+//var burningRefresh;
 
 //function for setting user data from inputs on Signin Page
-function getUserInput(){
+function setUp(){
 	if(document.getElementById("userName").value.length!=0){	//validating username input 
 		if(!(document.getElementById("maleGender").checked)&&(!(document.getElementById("femaleGender").checked))){		//validating user input for gender and responding
 			alert("Please select your gender");
@@ -72,6 +77,8 @@ function getUserInput(){
 			setGender();
 			setDriver();
 			setBACLost();
+			var timerSetup = now.getTime();
+			sessionStart = timerSetup;
 			//confirm inputs with user before proceeding
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
 			}
@@ -148,8 +155,25 @@ function canvasSetup(){
 
 canvasSetup();
 
+function getSessionDuration(){
+	var currentTime = now.getTime();
+	alert("sStart = " + sessionStart);
+	alert("currTime = " + currentTime);
+	durationMillis = currentTime - sessionStart;
+	alert("dMillis = " + durationMillis);
+	durationHours = (((durationMillis/1000)/60)/60);
+	alert("dHours = " + durationHours);
+	hoursTotal = durationHours.toFixed(3);
+	alert("hoursTotal = " + hoursTotal);
+	//if (hoursTotal < 1){
+	//	hoursTotal = 1;
+	//}
+}
+
 function addNewDrink() {
-	hoursTotal = hoursTotal + 1;
+	getSessionDuration();
+	alert(hoursTotal);
+	//hoursTotal = hoursTotal + 1;
 	getDrink();
 	calcBAC();
 	updateBACreader();

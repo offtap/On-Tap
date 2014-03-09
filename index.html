@@ -58,7 +58,7 @@
 <div data-role="navbar">
     <div id="menu" id="tapMe">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="#"><img src="images/logo3.svg" width="50"></a><p>
+            <a class="pure-menu-heading" data-href="a"><img src="images/logo3.svg" width="50"></a><p>
 
             <ul id="tapMe">
                 <li><a href="#" data-href="b">Sign-up</a></li>
@@ -271,9 +271,15 @@
                         </div>
 
                         <div class="pure-control-group">
-                            <p class="inputLabel">I am driving<br><input type="checkbox" id="driverCheckBox" ><p class="inputLabel"></p>
+                            <p class="inputLabel">Planning on driving?   <input type="checkbox" id="driverCheckBox" ><p class="inputLabel"></p>
                         </div>
-                          
+
+                        <div class="pure-control-group">
+                            <p class="inputLabel">I agree to disclaimer  <input type="checkbox" required="true" id="EUA" ><p class="inputLabel"></p>
+                        </div>
+                        <i id="disclaimer"><span style="color:black; font-size: 12px">DISCLAIMER: The app is designed to calculate approximate BAC values and should not be used as a true reading of BAC levels.</span></i>
+                        <br>
+                        <br>  
                         <input type="submit" id="userDataSubmit" class="newbutton" onClick="setUp()">
 
                         <input type="reset" id="userDataReset" class="newbutton">
@@ -283,7 +289,7 @@
                 <p id="dataCheck" class="inputLabel"></p>
             </div>
 
-            <i id="disclaimer"><span style="color:black; font-size: 10px">DISCLAIMER: The app is designed for entertainment purposes only and note a true accurate reading for BAC</span></i>
+            
     </div>
 </div>
 
@@ -380,7 +386,7 @@
 
         <div id="main">
             <div class="content">
-                 OnTap was built on the Gold Coast @ <div id="box"><a href="www.bond.edu.au">Bond University</a></div>.We are a web design and applications team building lightweight,<div id="box"> beautiful responsive</div> websites. We  <i class="icon-heart" style="color: red"></i> what we <div class="heart">&#x2665;</div> do ! Feel free to contact us for any questions.
+                 OnTap was built on the Gold Coast @ <div id="box"><a href="www.bond.edu.au">Bond University</a></div>.We are a web design and applications team building lightweight,<div id="box"> beautiful responsive</div> websites. We love what we do ! Feel free to contact us for any questions.
 
                 <div class="pure-g">
                     <div class="pure-u-1-3">

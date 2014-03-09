@@ -70,27 +70,33 @@ function getDrink(){
 	}
 	else if(document.getElementById("spiritSize1").checked && document.getElementById("spiritStrength3").checked) {
 		alert("Oops! I don't think you can get those around here!");
+		hoursTotal = hoursTotal - 1;
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength1").checked) {
 		alert("Oops! Did you mean to select 'Pre-mix'?");
+		hoursTotal = hoursTotal - 1;
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength2").checked) {
 		alert("Oops! Did you mean to select 'Pre-mix'?");
+		hoursTotal = hoursTotal - 1;
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength3").checked) {
 		newDrinkSD = spiritArray[2];
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength1").checked) {
 		alert("Oops! Did you mean to select 'Pre-mix'?");
+		hoursTotal = hoursTotal - 1;
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength2").checked) {
 		alert("Oops! Did you mean to select 'Pre-mix'?");
+		hoursTotal = hoursTotal - 1;
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength3").checked) {
 		newDrinkSD = spiritArray[3];
 	}
 	//Add new drink to total SD
 	SDTotal += newDrinkSD;
+	newDrinkSD = 0;
 }
 
 

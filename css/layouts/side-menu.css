@@ -16,7 +16,10 @@ body {
     opacity: .5;
 }
 
-
+#disclaimer{
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
 .pure-control-group1 {
     display: inline-block;

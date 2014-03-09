@@ -10,6 +10,9 @@ var ctx = c.getContext("2d");
 var c3 = document.getElementById("canvas3");
 var ctx3 = c3.getContext("2d");
 
+var c4 = document.getElementById("canvas4");
+var ctx4 = c4.getContext("2d");
+
 	//arc variables
 	var xPos = 125;			//c.width / 2;
     var yPos = 125;			//c.height / 2;
@@ -156,6 +159,7 @@ function setBACLost(){
 function canvasSetup(){
 	var img = document.getElementById("circleBackground");
 	ctx.drawImage(img,0,0);
+	ctx4.drawImage(img,0,0);
 }
 
 canvasSetup();
@@ -338,13 +342,53 @@ function instantCalc(){
 	hoursTotal = document.getElementById("instantHoursNo").value;
 	SDTotal = document.getElementById("instantDrinkNo").value;
 	calcBAC();
+	alert(newBAC);
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
-	updateBACreader();
-	drawNewDrink();
+	updateInstantBACreader();
+	drawInstantAnswer();
 	calcSoberIn();
 	updateStats();
+}
+
+function updateInstantBACreader(){
+	ctx4.clearRect(60,75,140,100);
+	ctx4.font = "50px Arial";
+	ctx4.fillText(newBAC.toFixed(3),60,142);
+}
+
+function drawInstantAnswer(){
+	startAngle = (-0.5*Math.PI);
+	animateTo = (((newBAC/0.1)*2)-0.5);
+	/*if (curVal >=1.5){
+		clearTimeout(animationRefresh);
+		drawTest();
+	}*/
+	if(curVal < animateTo){
+      curVal+= 0.01;
+      endAngle = curVal * Math.PI;
+      if(prevBAC < 0.1 && newBAC >= 0.1){
+			endAngle = 1.5 * Math.PI;
+		}
+      ctx4.beginPath();
+      ctx4.arc(xPos, yPos, radius, startAngle, endAngle, clockWise);
+      ctx4.lineWidth = 32;
+      ctx4.strokeStyle = '#3498db';
+      ctx4.stroke();
+    //redo the above block of code till arc reaches end angle
+    animationRefresh = setTimeout(drawInstantAnswer,25);
+	}
+	//stop the animation refreshing if arc has reached end angle
+	else if (curVal = animateTo){
+		clearTimeout(animationRefresh);
+	}
+}
+
+function resetInstantCanvas(){
+	ctx4.clearRect(0,0,250,250);
+	var img = document.getElementById("circleBackground");
+	ctx4.drawImage(img,0,0);
 }
 
 //for timer, leave alone for now please

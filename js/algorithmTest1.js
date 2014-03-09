@@ -36,7 +36,7 @@ var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
 
 //BAC variables
-var BACAfterBurn = 0.00;
+var BACAfterBurn = 0.00;	//new BAC after BAC burnt away at 15 min interval
 var prevBAC = 0.00;			//BAC before new drink
 var newBAC = 0.00;			//new Blood Alcohol Content after new drink
 
@@ -46,7 +46,7 @@ var SoberInDecimal = 0.00;		//multiple vars needed to calc hours + mins
 var SoberInHours = 0;		//integer value for hours
 var SoberInMins = 0;		//integer value for mins
 
-
+//variables for calulating approx local time user will be sober
 var now = new Date();
 var SoberTimeHours = 0;
 var SoberTimeMins = 0;
@@ -104,22 +104,15 @@ function setDriver(){
 function setBACLost(){
 	BACLostHourly = ((7.5)/(weight*genderConstant));
 	BACLost15Mins = BACLostHourly*0.25;
-	alert(BACLostHourly);
-	alert(BACLost15Mins);
-	//var BACburning = setInterval(updateBACBurnt(),900000);
+	//var BACburning = setInterval(burnBAC(),900000);
 }
 
 //DONT TOUCH, BAC COUNTDOWN FUNCTIONALITY WIP
 /*function burnBAC(){
-	alert("newBAC =" + newBAC);
-	alert("prevBAC = " + prevBAC)
 	BACAfterBurn = newBAC - BACLost15Mins;
 	prevBAC = newBAC;
-	newBAC = BACAfterBurn; 
-	alert("BAC AfterBurn" + BACAfterBurn);
-	alert("newBAC =" + newBAC);
-	alert("prevBAC = " + prevBAC)
-
+	newBAC = BACAfterBurn;
+	
 	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
 	animateTo = (((newBAC/0.1)*2)-0.5);
 	//if (curVal >=1.5){
@@ -127,8 +120,8 @@ function setBACLost(){
 		//burnTopLayer();
 	//}
 	//else {
-		if(curVal > animateTo){
-      	curVal-= 0.01;
+		if(curVal < animateTo){
+      	curVal+= 0.01;
       	endAngle = curVal * Math.PI;
       	if(prevBAC > 0.1 && newBAC <= 0.1){
 			endAngle = 1.5 * Math.PI;
@@ -136,11 +129,11 @@ function setBACLost(){
       	ctx.beginPath();
       	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
       	ctx.lineWidth = 32;
-      	ctx.globalCompositeOperation="destination-out";
+      	//ctx.globalCompositeOperation="destination-out";
       	ctx.strokeStyle = '#e74c3c';
       	ctx.stroke();
     	//redo the above block of code till arc reaches end angle
-    	burningRefresh = setTimeout(updateBACBurnt,25);
+    	burningRefresh = setTimeout(burnBAC,25);
 		}
 		//stop the animation refreshing if arc has reached end angle
 		else if (curVal = animateTo){

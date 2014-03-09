@@ -88,6 +88,7 @@ function setUp(){
 			confirm("Hi there, " + userName + "! So, just to double check, you're " + gender + " and you weigh about " + weight + " kgs, right?");
 			document.getElementById('b').style.display='none';
 			document.getElementById('a').style.display='block';
+			document.getElementById('menuLink').style.display='block';
 			}
 			}
 		}

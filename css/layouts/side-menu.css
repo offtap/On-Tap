@@ -331,9 +331,16 @@ a {
 
 }
 
+#FAQlist {
+    text-align: center;
+}
+
 #FAQlist li {
     cursor: pointer;
     color:black;
+    list-style-type: none;
+    font-weight: bold;
+    margin-right: 10%;
 }
 
 #FAQlist li a{
@@ -346,6 +353,7 @@ a {
 #north,
 #midlands {
     display: none;
+    margin-right: 20%;
 }
 
 

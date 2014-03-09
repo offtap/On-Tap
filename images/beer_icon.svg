@@ -555,5 +555,15 @@
 		h-2.564v13.992c0,0,0.932,8.045-5.249,8.045v28.799C1724.099,128.952,1727.132,130.702,1731.912,130.702z"/>
 	<path fill="#FFFFFF" d="M1749.427,135.986c4.781,0,7.812-1.749,7.812-1.749V105.44c0-7.909-5.246-8.046-5.246-8.046V83.403h-2.565
 		h-2.567v13.991c0,0-5.245,0.137-5.245,8.046v28.797C1741.614,134.237,1744.645,135.986,1749.427,135.986z"/>
+	
+		<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="148.588" y1="440.793" x2="148.588" y2="395.126"/>
+	
+		<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="126.089" y1="417.805" x2="169.587" y2="417.805"/>
+	
+		<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="149.338" y1="239.973" x2="149.338" y2="194.306"/>
+	
+		<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="126.839" y1="216.984" x2="170.337" y2="216.984"/>
+	<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="149.338" y1="51.41" x2="149.338" y2="5.743"/>
+	<line fill="none" stroke="#ED1F24" stroke-width="5" stroke-miterlimit="10" x1="126.839" y1="28.421" x2="170.337" y2="28.421"/>
 </g>
 </svg>

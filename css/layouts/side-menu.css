@@ -54,9 +54,9 @@ label[for="beer-menu-toggle"] {
 }
 
 #beermenu {
-    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-color:black;
     background-repeat: repeat;
-    opacity: .8;
+    opacity: 0.8;
     clear: left;
     color: #fff;
     min-height: 100%;

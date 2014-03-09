@@ -43,7 +43,7 @@ label[for="beer-menu-toggle"] {
     width: 100px;
     position: fixed;
     bottom: 10px;
-    left: 12%;
+    left: 8%;
     z-index: 1;
 }
 
@@ -106,7 +106,7 @@ label[for="wine-menu-toggle"] {
     width: 100px;
     position: fixed;
     bottom: 10px;
-    left: 43%;
+    left: 41%;
     z-index: 1; 
 }
 
@@ -591,7 +591,7 @@ appears on the left side of the page.
         This styles a link within a selected menu item `<li>`.
         */
         #menu .pure-menu-selected a {
-            color: #fff;
+            color: ;
         }
 
     /*

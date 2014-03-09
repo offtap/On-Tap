@@ -36,7 +36,7 @@
         <img src="images/logo4.svg">
         <p>
         <p>
-        <button name='Enter Site' class="newbutton" onClick="removeSplash()">ENTER SITE</button>
+        <button name='Enter Site' class="newbutton1" onClick="removeSplash()">ENTER SITE</button>
         </div>
         
         <video height:'auto' overflow: hidden; autoplay="autoplay" loop> //EDIT: loop="true" is deprecated nowadays
@@ -111,6 +111,9 @@
                         <!--<input type="submit" id="userDataSubmit" class="newbutton" onClick="addNewDrink()">-->
                         <button name='addDrink' class="newbutton" onClick="addNewDrink()">Add Drink</button>
                         <input type="reset" id="userDataReset" class="newbutton">
+                        
+                        <!--BURN BAC BUTTON-->
+
                         <button name='burnBAC' class="newbutton" onClick="burnBAC()">Burn BAC</button>
                     </fieldset>
                 </form>
@@ -121,6 +124,23 @@
                 </div>
             </div>
     </div>
+   
+
+    <div id="items">
+        <div id="item1" class="contentItem">
+                <p class="inputLabel">Beer<input type="radio" id="drinkType:Beer" name="drinkType" value="1"></p> 
+                <p class="inputLabel">Wine<input type="radio" id="drinkType:Wine" name="drinkType" value="2"></p>                                  <p class="inputLabel">Spirit<input type="radio" id="drinkType:Spirit" name="drinkType" value="3"></p> 
+        </div>
+        <div id="item2" class="contentItem contentItemVisible">Item 2</div>
+        <div id="item3" class="contentItem">Item 3</div>
+    </div>
+
+    <nav>
+        <div id="show1" data-target="item1">Give me Beer.</div>
+        <div id="show2" data-target="item2" class="toggled">Wine, please.</div>
+        <div id="show3" data-target="item3">Shots!</div>
+    </nav>
+    
 </div>
 
 
@@ -147,11 +167,19 @@
                             <p class="inputLabel">Weight (kgs)<br><input type="range" value="60" min="40" max="120" id="userWeight" ><p class="inputLabel"></p>
                         </div>
 
+<<<<<<< HEAD
                         <div class="pure-control-group">
                             <p class="inputLabel">I am driving<br><input type="checkbox" id="driverCheckBox" ><p class="inputLabel"></p>
                         </div>
                           
                         <input type="submit" id="userDataSubmit" class="newbutton" onClick="setUp()">
+=======
+                        
+                        <!-- need to learn how to make profile pic-->
+                        <!--<p class="inputLabel">Choose a profile picture:</p> <input type="file" accept="image/*" class="newbutton" id="capture" capture="camera">-->
+                          
+                        <input type="submit" id="userDataSubmit" class="newbutton" onClick="getUserInput()"> 
+>>>>>>> FETCH_HEAD
                         <input type="reset" id="userDataReset" class="newbutton">
                     </fieldset>
                 </form>
@@ -311,6 +339,28 @@
     $('#' + $(this).attr('data-href')).show();
     return false;//stop default behavior of link
 });</script>
+
+
+<script>
+$(function() {
+    
+    $("nav div").click(function() {
+       
+        /*
+        $("nav div").each(function(index) {           
+           $(this).removeClass("toggled"); 
+        });
+        */
+        
+        $(this).toggleClass("toggled");
+        
+        $( "#" + $(this).attr("data-target") ).toggleClass("contentItemVisible");
+    });
+    
+    
+    
+});
+</script>
 
 </body>
 </html>

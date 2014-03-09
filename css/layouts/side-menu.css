@@ -117,7 +117,7 @@ label[for="wine-menu-toggle"] {
 }
 
 #winemenu {
-    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-color:black;
     background-repeat: repeat;
     opacity: .8;
     clear: left;
@@ -179,7 +179,7 @@ label[for="spirit-menu-toggle"] {
 }
 
 #spiritmenu {
-    background: url('/Users/benhare/Desktop/On-Tap/images/stardust.png');
+    background-color:black;
     background-repeat: repeat;
     opacity: .8;
     clear: left;

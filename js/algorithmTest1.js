@@ -250,13 +250,13 @@ function getColour(){
 	if (desDriver){
 		desDriverColour();
 	}
-   	  else if (document.getElementById("drinkType:Beer").checked){
+   	  else if (document.getElementById("beer-menu-toggle").checked){
       	ctx.strokeStyle= '#f1c40f';
   	  }
-  	  else if (document.getElementById("drinkType:Wine").checked){
+  	  else if (document.getElementById("wine-menu-toggle").checked){
   	  	ctx.strokeStyle= '#2ecc71';
   	  }
-  	  else if (document.getElementById("drinkType:Spirit").checked){
+  	  else if (document.getElementById("spirit-menu-toggle").checked){
   	  	ctx.strokeStyle= '#3498db';
   	  }
 }

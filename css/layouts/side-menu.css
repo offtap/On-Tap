@@ -16,6 +16,8 @@ body {
     opacity: .5;
 }
 
+
+
 .pure-control-group1 {
     display: inline-block;
 }
@@ -24,6 +26,15 @@ canvas {
     z-index: 1;
 }
 
+#instantDrinkNo {
+    width: 80%;
+    margin-left: 10%;
+}
+
+#instantHoursNo {
+    width: 80%;
+    margin-left: 10%;
+}
 /*START OF BEERNAV CSS*/
 
 label[for="beer-menu-toggle"] {
@@ -246,16 +257,16 @@ position:absolute;
   bottom: 0;
 }
 
-.icon-heart {
-      -webkit-transition: all 2s ease;
-     -moz-transition: all 2s ease;
-       -o-transition: all 2s ease;
-      -ms-transition: all 2s ease;
-          transition: all 2s ease;
+
+@keyframes pound {
+    from { transform: none; }
+    50% { transform: scale(1.4); }
+    to { transform: none; }
 }
 
-.icon-heart:hover {
-    font-size: 5em;
+.heart {
+    /* ... */
+    animation: pound .5s infinite;
 }
 
 #box { 

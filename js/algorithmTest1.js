@@ -36,8 +36,8 @@ var BACLost15Mins = 0.00;
 
 //Session duration timer variables
 var sessionStart = 0;
-var durationMillis = 0;
-var durationHours = 0;
+var sessionDuration = 0;
+var curr = new Date();
 
 //BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
@@ -80,6 +80,7 @@ function setUp(){
 			setGender();
 			setDriver();
 			setBACLost();
+			setStartTime();
 			if(!(document.getElementById("EUA").checked)){
 				alert("Please indicate that you have read and understood our disclaimer");
 			}
@@ -100,7 +101,10 @@ function setUp(){
 function setStartTime(){
 	var startHours = now.getHours();
 	var startMins = now.getMinutes();
-	sessionStart = timerSetup;
+	var startHrMillis = startHours*60*60*1000;
+	var startMinMillis = startMins*60*1000;
+	sessionStart = startHrMillis + startMinMillis;
+	alert("sessionStart = " + sessionStart);
 }
 
 function setGender(){
@@ -126,42 +130,35 @@ function setDriver(){
 function setBACLost(){
 	BACLostHourly = ((7.5)/(weight*genderConstant));
 	BACLost15Mins = BACLostHourly*0.25;
-	//var BACburning = setInterval(burnBAC(),900000);
+	var BACburning = setInterval(burnBAC(),15000);
+	alert("BURNBAC interval set!");
 }
 
 //DONT TOUCH, BAC COUNTDOWN FUNCTIONALITY WIP
-/*function burnBAC(){
-	BACAfterBurn = newBAC - BACLost15Mins;
-	prevBAC = newBAC;
-	newBAC = BACAfterBurn;
+function burnBAC(){
+	if(newBAC >= BACLost15Mins){
+		alert("BURNBAC OPERATING!");
+		BACAfterBurn = newBAC - BACLost15Mins;
+		prevBAC = newBAC;
+		newBAC = BACAfterBurn;
 	
-	startAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
-	animateTo = (((newBAC/0.1)*2)-0.5);
-	//if (curVal >=1.5){
-		//clearTimeout(burningRefresh);
-		//burnTopLayer();
-	//}
-	//else {
-		if(curVal < animateTo){
-      	curVal+= 0.01;
-      	endAngle = curVal * Math.PI;
-      	if(prevBAC > 0.1 && newBAC <= 0.1){
+		startAngle = (((newBAC/0.1)*2*Math.PI)-0.5*Math.PI);
+		endAngle = (((prevBAC/0.1)*2*Math.PI)-0.5*Math.PI);
+	/*if (curVal >=1.5){
+		clearTimeout(animationRefresh);
+		drawTest();
+	}*/
+      /*if(prevBAC < 0.1 && newBAC >= 0.1){
 			endAngle = 1.5 * Math.PI;
-		}
-      	ctx.beginPath();
-      	ctx.arc(xPos, yPos, radius, startAngle, endAngle, counterClockwise);
-      	ctx.lineWidth = 32;
-      	//ctx.globalCompositeOperation="destination-out";
-      	ctx.strokeStyle = '#e74c3c';
-      	ctx.stroke();
-    	//redo the above block of code till arc reaches end angle
-    	burningRefresh = setTimeout(burnBAC,25);
-		}
-		//stop the animation refreshing if arc has reached end angle
-		else if (curVal = animateTo){
-		clearTimeout(burningRefresh);
-		}
-}*/
+		}*/
+      ctx.beginPath();
+      ctx.arc(xPos, yPos, radius, startAngle, endAngle, clockWise);
+      ctx.lineWidth = 32;
+      ctx.strokeStyle = 'c1c1c1';
+      ctx.stroke();
+      updateBACreader();
+  	}
+}
 
 function canvasSetup(){
 	var img = document.getElementById("circleBackground");
@@ -172,12 +169,43 @@ function canvasSetup(){
 canvasSetup();
 
 function getSessionDuration(){
-	
+	var currHours = curr.getHours();
+	var currMins = curr.getMinutes();
+	var currHrMillis = currHours*60*60*1000;
+	var currMinMillis = currMins*60*1000;
+	var currTime = currHrMillis + currMinMillis;
+	//if both sessionStart and currTime are less than 12 noon then they must have started after midnight
+	if(sessionStart <= 43200000 && currTime <= 43200000){
+		sessionDuration = currTime - sessionStart + 3600000;
+		alert("first option selected");
+		alert("SS = " + sessionStart);
+		alert("cT = " + currTime);
+		alert('sessionDuration = ' + sessionDuration);
+	}
+	//if currTime < 12 noon and sessionStart was greater than 12 noon then assume drinking session has passed midnight
+	else if(currTime <= 43200000 && sessionStart >= 43200000){
+		//sessDuration equals 24hrs - sessStart + currTime
+		sessionDuration = ((86400000 - sessionStart) + currTime);
+		alert("second option selected");
+		alert('sessionDuration = ' + sessionDuration);
+	}
+	//otherwise they started after noon and it has not yet passed midnight
+	else{
+		sessionDuration = currTime - sessionStart;
+		alert("third option selected");
+		alert('sessionDuration = ' + sessionDuration);
+	}
 }
 
 function addNewDrink() {
-	//getSessionDuration();
-	hoursTotal = hoursTotal + 1;
+	getSessionDuration();
+	if(sessionDuration <= 3600000){
+		hoursTotal = 1;
+	}
+	else{
+		hoursTotal = (((sessionDuration/1000)/60)/60);
+	}
+	alert("hoursTotal = " + hoursTotal);
 	getDrink();
 	calcBAC();
 	updateBACreader();
@@ -355,13 +383,19 @@ function instantCalc(){
 	updateInstantBACreader();
 	drawInstantAnswer();
 	calcSoberIn();
-	updateStats();
+	updateInstantStats();
 }
 
 function updateInstantBACreader(){
 	ctx4.clearRect(60,75,140,100);
 	ctx4.font = "50px Arial";
 	ctx4.fillText(newBAC.toFixed(3),60,142);
+}
+
+function updateInstantStats(){
+	document.getElementById("InstantSoberInCounter").innerHTML = "Time till sober: " + SoberInHours + " hrs " + SoberInMins + " mins";
+	document.getElementById("InstantSoberTimeCounter").innerHTML = "Sober at: " + SoberTimeHours + ":" + extraZero + SoberTimeMins + AMPM;
+	document.getElementById("InstantCalcDrinkInput").reset();
 }
 
 function drawInstantAnswer(){

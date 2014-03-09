@@ -170,8 +170,7 @@ function getSessionDuration(){
 
 function addNewDrink() {
 	//getSessionDuration();
-	alert(hoursTotal);
-	//hoursTotal = hoursTotal + 1;
+	hoursTotal = hoursTotal + 1;
 	getDrink();
 	calcBAC();
 	updateBACreader();

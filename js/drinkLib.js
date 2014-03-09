@@ -1,10 +1,8 @@
 var beerArray = [0.6,0.9,1.2,0.8,1.2,1.6,1.1,1.6,2.2];
-var wineArray = [1,1.5,0.9,1.4,1.4,1,1,1,1];
-var spiritArray = [0.5,1,2,1,1,1,1,1,1];
+var wineArray = [1,0.9,0.9,1.5,1.4,1.4,7.7,6.8,7.1];
+var spiritArray = [1,2,1.5,2.1];
 
 function getDrink(){
-	alert("getDrink working");
-
 	//Beer selections
 	if(document.getElementById("beerSize1").checked && document.getElementById("beerStrength1").checked) {
 		newDrinkSD = beerArray[0];
@@ -71,33 +69,28 @@ function getDrink(){
 		newDrinkSD = spiritArray[1];
 	}
 	else if(document.getElementById("spiritSize1").checked && document.getElementById("spiritStrength3").checked) {
-		newDrinkSD = spiritArray[2];
+		alert("Oops! I don't think you can get those around here!");
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength1").checked) {
-		newDrinkSD = spiritArray[3];
+		alert("Oops! Did you mean to select 'Pre-mix'?");
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength2").checked) {
-		newDrinkSD = spiritArray[4];
+		alert("Oops! Did you mean to select 'Pre-mix'?");
 	}
 	else if(document.getElementById("spiritSize2").checked && document.getElementById("spiritStrength3").checked) {
-		newDrinkSD = spiritArray[5];
+		newDrinkSD = spiritArray[2];
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength1").checked) {
-		newDrinkSD = spiritArray[6];
+		alert("Oops! Did you mean to select 'Pre-mix'?");
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength2").checked) {
-		newDrinkSD = spiritArray[7];
+		alert("Oops! Did you mean to select 'Pre-mix'?");
 	}
 	else if(document.getElementById("spiritSize3").checked && document.getElementById("spiritStrength3").checked) {
-		newDrinkSD = spiritArray[8];
+		newDrinkSD = spiritArray[3];
 	}
-	else{
-		newDrinkSD = 1;
-	}
-
+	//Add new drink to total SD
 	SDTotal += newDrinkSD;
-	alert(newDrinkSD);
-	alert(SDTotal);
 }
 
 

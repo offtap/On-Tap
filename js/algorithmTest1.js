@@ -31,20 +31,20 @@ var gender = "unknown";				//user-defined gender
 var genderConstant = 6.8;			//gender constant depending on gender (default=male, 6.8)
 var desDriver = false;
 
-var BACLostHourly = 0.00;
-var BACLost15Mins = 0.00;
+//var BACLostHourly = 0.00;
+//var BACLost15Mins = 0.00;
 
 //Session duration timer variables
-var sessionStart = 0;
-var sessionDuration = 0;
-var curr = new Date();
+//var sessionStart = 0;
+//var sessionDuration = 0;
+//var curr = new Date();
 
 //BAC formula variables
 var hoursTotal = 0.00;		//hours since session start
 var SDTotal = 0.00;		//total standard drinks consumed
 
 //BAC variables
-var BACAfterBurn = 0.00;	//new BAC after BAC burnt away at 15 min interval
+//var BACAfterBurn = 0.00;	//new BAC after BAC burnt away at 15 min interval
 var prevBAC = 0.00;			//BAC before new drink
 var newBAC = 0.00;			//new Blood Alcohol Content after new drink
 
@@ -66,7 +66,6 @@ var newDrinkSD = 0.00; //number of standard drinks added to SDTotal when new dri
 
 var animationRefresh;
 var animationRefresh2;
-//var burningRefresh;
 
 //function for setting user data from inputs on Signin Page
 function setUp(){
@@ -79,8 +78,8 @@ function setUp(){
 			weight = document.getElementById("userWeight").value;	//setting weight var to value from form
 			setGender();
 			setDriver();
-			setBACLost();
-			setStartTime();
+			//setBACLost();
+			//setStartTime();
 			if(!(document.getElementById("EUA").checked)){
 				alert("Please indicate that you have read and understood our disclaimer");
 			}
@@ -98,14 +97,14 @@ function setUp(){
 	}
 }
 
-function setStartTime(){
+/*function setStartTime(){
 	var startHours = now.getHours();
 	var startMins = now.getMinutes();
 	var startHrMillis = startHours*60*60*1000;
 	var startMinMillis = startMins*60*1000;
 	sessionStart = startHrMillis + startMinMillis;
 	alert("sessionStart = " + sessionStart);
-}
+}*/
 
 function setGender(){
 	if(document.getElementById("maleGender").checked) {		// if male set genderConstant = 6.8 for calculations
@@ -127,14 +126,18 @@ function setDriver(){
 	}
 }
 
-function setBACLost(){
+/*IMPORTANT - James, I cannot see any reason that the below functions
+do not work to draw in grey arcs that 'erase' the drawn pixels
+to effectively draw backwards every 15mins to represent the user
+processing alcohol*/
+
+/*function setBACLost(){
 	BACLostHourly = ((7.5)/(weight*genderConstant));
 	BACLost15Mins = BACLostHourly*0.25;
 	var BACburning = setInterval(burnBAC(),15000);
 	alert("BURNBAC interval set!");
 }
 
-//DONT TOUCH, BAC COUNTDOWN FUNCTIONALITY WIP
 function burnBAC(){
 	if(newBAC >= BACLost15Mins){
 		alert("BURNBAC OPERATING!");
@@ -150,7 +153,7 @@ function burnBAC(){
 	}*/
       /*if(prevBAC < 0.1 && newBAC >= 0.1){
 			endAngle = 1.5 * Math.PI;
-		}*/
+		}
       ctx.beginPath();
       ctx.arc(xPos, yPos, radius, startAngle, endAngle, clockWise);
       ctx.lineWidth = 32;
@@ -158,7 +161,7 @@ function burnBAC(){
       ctx.stroke();
       updateBACreader();
   	}
-}
+}*/
 
 function canvasSetup(){
 	var img = document.getElementById("circleBackground");
@@ -168,7 +171,16 @@ function canvasSetup(){
 
 canvasSetup();
 
-function getSessionDuration(){
+/*IMPORTANT - James, is there a problem with the getHours() and getMins() methods
+or have I done something wrong? As far as I can see, there is no logical reason for 
+this code not to work, and I know that if the first two lines would get a new
+Date object and get the hours and mins every time this function ran
+then the timer would work perfectly, however for some reason they seem
+to be linked to the Date object of the 'sessionStart' timer, and only are
+set once, not every time this function runs. Please advise. 
+This is approx 2 lines off functioning perfectly.*/
+
+/*function getSessionDuration(){
 	var currHours = curr.getHours();
 	var currMins = curr.getMinutes();
 	var currHrMillis = currHours*60*60*1000;
@@ -195,17 +207,17 @@ function getSessionDuration(){
 		alert("third option selected");
 		alert('sessionDuration = ' + sessionDuration);
 	}
-}
+}*/
 
 function addNewDrink() {
-	getSessionDuration();
+	/*getSessionDuration();
 	if(sessionDuration <= 3600000){
 		hoursTotal = 1;
 	}
 	else{
 		hoursTotal = (((sessionDuration/1000)/60)/60);
-	}
-	alert("hoursTotal = " + hoursTotal);
+	}*/
+	hoursTotal += 0.5;
 	getDrink();
 	calcBAC();
 	updateBACreader();
@@ -376,7 +388,6 @@ function instantCalc(){
 	hoursTotal = document.getElementById("instantHoursNo").value;
 	SDTotal = document.getElementById("instantDrinkNo").value;
 	calcBAC();
-	alert(newBAC);
 	if(newBAC<0.00){
 		newBAC = 0.00;
 	}
